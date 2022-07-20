@@ -9,5 +9,5 @@ public interface GameRepository {
     Mono<Game> save(Game game);
     Flux<Game> findAll();
     Mono<Game> findById(String id);
-    Mono<Void> delete(String id);
+    Mono<Void> deleteById(String id);
 }
