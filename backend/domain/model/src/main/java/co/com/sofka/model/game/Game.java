@@ -1,4 +1,5 @@
 package co.com.sofka.model.game;
+import co.com.sofka.model.board.Board;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.player.Player;
 import lombok.AllArgsConstructor;
