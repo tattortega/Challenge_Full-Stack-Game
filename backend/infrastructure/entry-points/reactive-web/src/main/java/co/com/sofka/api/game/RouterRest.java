@@ -34,6 +34,11 @@ public class RouterRest {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> routerStartGameFunction(StartGameHandler startGameHandler) {
+        return route(POST("/api/game/start"), startGameHandler::startGame);
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> routerCreatePlayerFunction(CreatePlayerHandler createPlayerHandler) {
         return route(POST("/api/player"), createPlayerHandler::createPlayer);
     }
