@@ -41,7 +41,7 @@ public class AddPlayerUseCase implements BiFunction<Game, Player, Mono<Object>> 
                 .map(game1 -> game1.toBuilder()
                         .id(game.getId())
                         .players(playerSet)
-                        .board(game.getBoard())
+//                        .board(game.getBoard())
                         .round(game.getRound())
                         .cards(game.getCards())
                         .build())

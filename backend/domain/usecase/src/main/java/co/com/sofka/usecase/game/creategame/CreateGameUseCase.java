@@ -9,7 +9,6 @@ import java.util.function.Function;
 
 @RequiredArgsConstructor
 public class CreateGameUseCase implements Function<Game, Mono<Game>> {
-
     private final GameRepository gameRepository;
 
     @Override
