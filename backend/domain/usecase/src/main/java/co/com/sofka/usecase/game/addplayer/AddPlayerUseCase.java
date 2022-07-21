@@ -35,7 +35,8 @@ public class AddPlayerUseCase implements BiFunction<Game, Player, Mono<Object>> 
 //                    return game.setPlayers(playerSet);
 //                });
         Mono<Player> playername = playerRepository.findById(player.getId());
-        playerSet.add(playername.block());
+//        Player player1 = playername.map(p-> new Player(p.getId(),p.getScore(),p.getCards(),p.getUser()));
+            playerSet.add(playername.toFuture().join());
         return gameRepository.findById(game.getId())
                 .switchIfEmpty(Mono.error(new NotFoundException("No se encontro juego")))
                 .map(game1 -> game1.toBuilder()
