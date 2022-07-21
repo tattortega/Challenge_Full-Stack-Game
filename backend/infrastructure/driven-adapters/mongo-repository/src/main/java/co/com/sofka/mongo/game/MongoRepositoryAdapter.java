@@ -24,7 +24,7 @@ public class MongoRepositoryAdapter extends AdapterOperations<Game, GameDocument
 
 
 //    @Override
-    public Mono<Player> addPlayer(Player player) {
-        return this.addPlayer(player);
-    }
+//    public Mono<Player> addPlayer(Player player) {
+//        return this.addPlayer(player);
+//    }
 }
