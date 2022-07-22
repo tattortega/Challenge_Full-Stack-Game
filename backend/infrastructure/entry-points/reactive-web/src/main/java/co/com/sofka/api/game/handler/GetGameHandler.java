@@ -1,7 +1,6 @@
 package co.com.sofka.api.game.handler;
 
 import co.com.sofka.usecase.game.getgame.GetGameUseCase;
-import co.com.sofka.usecase.player.getplayer.GetPlayerUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;

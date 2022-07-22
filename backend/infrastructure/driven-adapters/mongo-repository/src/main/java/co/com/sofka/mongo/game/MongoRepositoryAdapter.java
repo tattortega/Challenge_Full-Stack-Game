@@ -22,4 +22,5 @@ public class MongoRepositoryAdapter extends AdapterOperations<Game, GameDocument
         super(repository, mapper, d -> mapper.map(d, Game.class));
     }
 
+
 }

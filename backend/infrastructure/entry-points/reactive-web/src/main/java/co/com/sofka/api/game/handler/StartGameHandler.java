@@ -1,6 +1,7 @@
 package co.com.sofka.api.game.handler;
 
 import co.com.sofka.model.game.Game;
+import co.com.sofka.usecase.board.createboard.CreateBoardUseCase;
 import co.com.sofka.usecase.game.creategame.CreateGameUseCase;
 import co.com.sofka.usecase.game.distributecards.DistributeCardsUseCase;
 import co.com.sofka.usecase.game.startgame.StartGameUseCase;
@@ -18,6 +19,7 @@ public class StartGameHandler {
 
     private final StartGameUseCase startGameUseCase;
     private final DistributeCardsUseCase distributeCardsUseCase;
+    private final CreateBoardUseCase createBoardUseCase;
 
     public Mono<ServerResponse> startGame(ServerRequest serverRequest) {
         return serverRequest
