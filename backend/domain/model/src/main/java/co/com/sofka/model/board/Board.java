@@ -15,6 +15,6 @@ import java.util.Map;
 public class Board {
 
     private String id;
-    private Map<Player, Card> cardsBetPlayers;
-    private Map<Player, Boolean> turn;
+    private Map<String, Card> cardsBetPlayers;
+    private Map<String, Boolean> turn;
 }
