@@ -18,7 +18,7 @@ public class RouterBoardRest {
     @Bean
     public RouterFunction<ServerResponse> routerCreateBoardFunction(CreateBoardHandler createBoardHandler) {
         return RouterFunctions.route(
-                POST("/api/{game}/board").and(contentType(APPLICATION_JSON)), createBoardHandler::createBoard);
+                POST("/api/board").and(contentType(APPLICATION_JSON)), createBoardHandler::createBoard);
     }
 
 }
