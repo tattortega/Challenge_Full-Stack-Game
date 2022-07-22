@@ -1,5 +1,4 @@
 package co.com.sofka.api.board.handler;
-
 import co.com.sofka.model.board.Board;
 import co.com.sofka.usecase.board.createboard.CreateBoardUseCase;
 import lombok.RequiredArgsConstructor;
@@ -17,15 +16,14 @@ public class CreateBoardHandler {
     private final CreateBoardUseCase createBoardUseCase;
 
     public Mono<ServerResponse> createBoard(ServerRequest serverRequest) {
-        System.out.println("Entro");
-        var idGame = serverRequest.pathVariable("game");
-        System.out.println("idGame: " + idGame);
         return serverRequest
                 .bodyToMono(Board.class)
-                .flatMap(board -> ServerResponse.ok()
-                        //.status(HttpStatus.CREATED)
+                .flatMap(createBoardUseCase::apply)
+                .flatMap(player -> ServerResponse
+                        .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .body(createBoardUseCase.apply(idGame, board), Board.class));
+                        .bodyValue(player));
     }
+
 
 }
