@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,5 +20,5 @@ public class Game {
     private Integer round;
     private Set<Player> players;
     private Board board;
-    private Set<Card> cards;
+    private List<Card> cards;
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -19,5 +20,5 @@ public class GameDocument {
     private Integer round;
     private Set<Player> players;
     private Board board;
-    private Set<Card> cards;
+    private List<Card> cards;
 }
