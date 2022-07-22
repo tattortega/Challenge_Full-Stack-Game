@@ -18,7 +18,7 @@ public class StartGameUseCase implements Function<Game, Mono<Game>> {
     @Override
     public Mono<Game> apply(Game game) {
         return gameRepository.findById(game.getId())
-                .map(p -> new Game(game.getId(), game.getRound(), game.getPlayers(), game.getCards()))
+                .map(p -> new Game(game.getId(), game.getRound(), game.getPlayers(), game.getBoard(), game.getCards()))
                 .flatMap(gameRepository::save);
     }
 }
