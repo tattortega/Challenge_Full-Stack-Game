@@ -8,5 +8,4 @@ import reactor.core.publisher.Mono;
 
 public interface MongoDBRepository extends ReactiveMongoRepository<GameDocument, String>, ReactiveQueryByExampleExecutor<GameDocument> {
 
-//    Mono<Player> addPlayer(Player player);
 }
