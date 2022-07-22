@@ -22,76 +22,58 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
 
     @Override
     public Mono<Game> apply(Game game) {
-        System.out.println("entro");
-        Set<Player> playerSet1 = new HashSet<>();
+        Set<Player> playerSet1;
+        Game game1 = game;
         Set<Player> playerSet = game.getPlayers();
         playerSet1 = playerSet.stream().map(player -> {
-            Set<Card> cardSet = addCards(game);
-            return player.toBuilder()
+            Set<Card> cardSet = addCards(game1);
+            game1.toBuilder()
+                    .id(game1.getId())
+                    .round(game1.getRound())
+                    .players(game1.getPlayers())
+                    .cards(removeCard(cardSet, game.getCards()))
+                    .build();
+            Player player1 = player.toBuilder()
                     .id(player.getId())
                     .score(player.getScore())
                     .user(player.getUser())
                     .cards(cardSet)
                     .build();
+            playerRepository.save(player1).subscribe();
+            return player1;
         }).collect(Collectors.toSet());
-        Set<Player> finalPlayerSet = playerSet1;
-        Flux.fromIterable(finalPlayerSet).map(player -> {
-                    Set<Card> cardSet = addCards(game);
-                    return player.toBuilder()
-                            .id(player.getId())
-                            .user(player.getUser())
-                            .score(player.getScore())
-                            .cards(cardSet)
-                            .build();
-                })
-                .flatMap(playerRepository::save)
-                .subscribe();
         return gameRepository.findById(game.getId())
                 .map(p -> p.toBuilder()
                         .id(game.getId())
                         .round(game.getRound())
-                        .players(finalPlayerSet)
+                        .players(playerSet1)
                         .cards(game.getCards())
                         .build())
                 .flatMap(gameRepository::save);
     }
 
     private Set<Card> addCards(Game game) {
-        System.out.println("entro2");
         Set<Card> cardSet = new HashSet<>();
         List<Card> cardList = new ArrayList<>(game.getCards());
-
         Random r = new Random();
-        Flux.range(0, 5)
+        Flux.range(0, 2)
                 .map(i -> {
-                    r.nextInt(4);
-                    cardSet.add(cardList.get(i));
-                    return removeCard(cardList.get(i), game);
+                    int value = r.nextInt(cardList.size()-i);
+                    cardSet.add(cardList.get(value));
+                    cardList.remove(cardList.get(value));
+                    return i;
                 }).subscribe();
         return cardSet;
     }
 
-    private Mono<Game> removeCard(Card card, Game game) {
-        Set<Card> cardList = new HashSet<>(game.getCards());
-        System.out.println("lista original" + cardList);
-        cardList.remove(card);
-        System.out.println("lista cambiada" + cardList);
-//        return Mono.just(game.toBuilder()
-//                .id(game.getId())
-//                .players(game.getPlayers())
-//                .round(game.getRound())
-//                .cards(cardList)
-//                .build());
-//        Game gameMono = new Game(game.getId(), game.getRound(), game.getPlayers(), cardList);
-//        return gameRepository.save(gameMono);
-        return gameRepository.findById(game.getId())
-                .map(p -> p.toBuilder()
-                        .id(game.getId())
-                        .round(game.getRound())
-                        .players(game.getPlayers())
-                        .cards(cardList)
-                        .build())
-                .flatMap(gameRepository::save);
+    private Set<Card> removeCard(Set<Card> cardsPlayer, Set<Card> cardsGame) {
+        List<Card> cardListPlayer = new ArrayList<>(cardsPlayer);
+        Flux.range(0,cardsPlayer.size())
+                .map(i -> {
+                    cardsGame.remove(cardListPlayer.get(i));
+                    return i;
+                }).subscribe();
+        return cardsGame;
     }
 }
 
