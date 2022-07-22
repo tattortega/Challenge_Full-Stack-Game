@@ -56,7 +56,7 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
         Set<Card> cardSet = new HashSet<>();
         List<Card> cardList = new ArrayList<>(game.getCards());
         Random r = new Random();
-        Flux.range(0, 2)
+        Flux.range(0, 5)
                 .map(i -> {
                     int value = r.nextInt(cardList.size()-i);
                     cardSet.add(cardList.get(value));
@@ -66,7 +66,7 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
         return cardSet;
     }
 
-    private Set<Card> removeCard(Set<Card> cardsPlayer, Set<Card> cardsGame) {
+    private List<Card> removeCard(Set<Card> cardsPlayer, List<Card> cardsGame) {
         List<Card> cardListPlayer = new ArrayList<>(cardsPlayer);
         Flux.range(0,cardsPlayer.size())
                 .map(i -> {
