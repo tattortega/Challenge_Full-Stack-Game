@@ -22,9 +22,4 @@ public class MongoRepositoryAdapter extends AdapterOperations<Game, GameDocument
         super(repository, mapper, d -> mapper.map(d, Game.class));
     }
 
-
-//    @Override
-//    public Mono<Player> addPlayer(Player player) {
-//        return this.addPlayer(player);
-//    }
 }
