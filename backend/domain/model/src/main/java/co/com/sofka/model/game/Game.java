@@ -18,6 +18,6 @@ public class Game {
     private String id;
     private Integer round;
     private Set<Player> players;
-//    private Board board;
+    private Board board;
     private Set<Card> cards;
 }
