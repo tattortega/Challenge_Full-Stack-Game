@@ -41,6 +41,17 @@ public class RouterGameRest {
         return route(POST("/api/game/clean-board"), cleanBoardHandler::cleanBoard);
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> routerCountPlayers(CountPlayersHandler countPlayersHandler) {
+        return route(POST("/api/game/count-player"), countPlayersHandler::countPlayers);
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> routerEndGame(EndGameHandler endGameHandler) {
+        return route(POST("/api/game/end-game"), endGameHandler::endGame);
+    }
+
+
 
 
 }

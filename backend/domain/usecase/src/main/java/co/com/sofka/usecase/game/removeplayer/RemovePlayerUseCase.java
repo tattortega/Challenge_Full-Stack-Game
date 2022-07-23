@@ -3,6 +3,7 @@ package co.com.sofka.usecase.game.removeplayer;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
 import co.com.sofka.model.player.Player;
+import co.com.sofka.usecase.game.countplayers.CountPlayersUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -15,13 +16,12 @@ import java.util.stream.Collectors;
 public class RemovePlayerUseCase implements BiFunction<Game, Set<Player>, Mono<Game>> {
 
     private final GameRepository gameRepository;
+    //private final CountPlayersUseCase countPlayersUseCase;
 
     @Override
     public Mono<Game> apply(Game game, Set<Player> playersRemove) {
 
-        Set<Player> players = playersRemove;
-
-        players.stream().map(player -> {
+        playersRemove.stream().map(player -> {
             game.getPlayers().remove(player);
             return game;
         }).collect(Collectors.toSet());

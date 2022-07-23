@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CountCardPlayerUseCase implements Function<Game, Mono<Game>> {
 
-    private final GameRepository gameRepository;
+    //private final GameRepository gameRepository;
     private final RemovePlayerUseCase removePlayerUseCase;
 
     @Override
