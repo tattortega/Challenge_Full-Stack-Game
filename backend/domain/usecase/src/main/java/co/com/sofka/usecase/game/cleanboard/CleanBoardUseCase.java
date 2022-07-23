@@ -1,4 +1,4 @@
-package co.com.sofka.usecase.cleanboard;
+package co.com.sofka.usecase.game.cleanboard;
 
 import co.com.sofka.model.board.Board;
 import co.com.sofka.model.card.Card;

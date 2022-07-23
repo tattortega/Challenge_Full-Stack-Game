@@ -1,8 +1,7 @@
 package co.com.sofka.api.game.handler;
 
 import co.com.sofka.model.game.Game;
-import co.com.sofka.usecase.cleanboard.CleanBoardUseCase;
-import co.com.sofka.usecase.game.countcardplayer.CountCardPlayerUseCase;
+import co.com.sofka.usecase.game.cleanboard.CleanBoardUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

@@ -3,7 +3,7 @@ package co.com.sofka.usecase.game.assignwinnerround;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
-import co.com.sofka.usecase.cleanboard.CleanBoardUseCase;
+import co.com.sofka.usecase.game.cleanboard.CleanBoardUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
