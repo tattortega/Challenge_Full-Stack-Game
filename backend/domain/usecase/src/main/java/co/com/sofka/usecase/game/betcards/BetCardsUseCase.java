@@ -1,10 +1,8 @@
-package co.com.sofka.usecase.game.createround;
+package co.com.sofka.usecase.game.betcards;
 
-import co.com.sofka.model.board.Board;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
-import co.com.sofka.model.player.Player;
 import co.com.sofka.usecase.game.comparatecardsingame.ComparateCardsInGameUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
@@ -14,10 +12,9 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public class CreateRoundUseCase implements Function<Game, Mono<Game>> {
+public class BetCardsUseCase implements Function<Game, Mono<Game>> {
 
     private final GameRepository gameRepository;
     private final ComparateCardsInGameUseCase comparateCardsInGameUseCase;
