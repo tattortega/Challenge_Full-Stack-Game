@@ -5,6 +5,7 @@ import co.com.sofka.model.card.Card;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
 import co.com.sofka.model.player.Player;
+import co.com.sofka.usecase.game.comparatecardsingame.ComparateCardsInGameUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class CreateRoundUseCase implements Function<Game, Mono<Game>> {
 
     private final GameRepository gameRepository;
+    private final ComparateCardsInGameUseCase comparateCardsInGameUseCase;
 
     @Override
     public Mono<Game> apply(Game game) {
@@ -41,6 +43,6 @@ public class CreateRoundUseCase implements Function<Game, Mono<Game>> {
             throw new RuntimeException(e);
         }
 
-        return gameRepository.save(game);
+        return gameRepository.save(game).flatMap(comparateCardsInGameUseCase::apply);
     }
 }
