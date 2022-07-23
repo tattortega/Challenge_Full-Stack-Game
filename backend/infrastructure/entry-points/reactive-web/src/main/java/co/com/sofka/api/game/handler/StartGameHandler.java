@@ -4,6 +4,7 @@ import co.com.sofka.model.game.Game;
 import co.com.sofka.usecase.board.assignturnofplayer.AssignTurnOfPlayerUseCase;
 import co.com.sofka.usecase.board.createboard.CreateBoardUseCase;
 import co.com.sofka.usecase.game.creategame.CreateGameUseCase;
+import co.com.sofka.usecase.game.createround.CreateRoundUseCase;
 import co.com.sofka.usecase.game.distributecards.DistributeCardsUseCase;
 import co.com.sofka.usecase.game.startgame.StartGameUseCase;
 import lombok.RequiredArgsConstructor;
@@ -20,14 +21,14 @@ public class StartGameHandler {
 
     private final StartGameUseCase startGameUseCase;
     private final DistributeCardsUseCase distributeCardsUseCase;
-    private final AssignTurnOfPlayerUseCase assignTurnOfPlayerUseCase;
+    private final CreateRoundUseCase createRoundUseCase;
 
     public Mono<ServerResponse> startGame(ServerRequest serverRequest) {
         return serverRequest
                 .bodyToMono(Game.class)
                 .flatMap(startGameUseCase::apply)
                 .flatMap(distributeCardsUseCase::apply)
-                //.flatMap(assignTurnOfPlayerUseCase::apply)
+                .flatMap(createRoundUseCase::apply)
                 .flatMap(game -> ServerResponse
                         .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
