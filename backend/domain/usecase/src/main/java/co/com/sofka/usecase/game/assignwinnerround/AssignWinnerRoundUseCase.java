@@ -3,6 +3,7 @@ package co.com.sofka.usecase.game.assignwinnerround;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
+import co.com.sofka.usecase.cleanboard.CleanBoardUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<Game>> {
 
     private final GameRepository gameRepository;
+    private final CleanBoardUseCase cleanBoardUseCase;
 
     @Override
     public Mono<Game> apply(Game game, String idWinner) {
@@ -33,6 +35,7 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
                         }).collect(Collectors.toList()))
                 .subscribe();
 
-        return gameRepository.save(game);
+        return gameRepository.save(game)
+                .flatMap(cleanBoardUseCase::apply);
     }
 }
