@@ -22,7 +22,7 @@ public class EndGameUseCase implements Function<Game, Mono<Game>> {
         return gameRepository.findById(game.getId())
                 .map(game1 -> {
                     game1.getPlayers().stream().findFirst().get().setScore(100);
-                    returnCardsUseCase.apply(game1, game1.getPlayers().stream().findFirst().get());
+                    returnCardsUseCase.apply(game1, game1.getPlayers().stream().findFirst().get().getId());
                     return game1;
                 }).flatMap(gameRepository::save);
 

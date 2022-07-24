@@ -1,7 +1,6 @@
 package co.com.sofka.api.game;
 
 import co.com.sofka.api.game.handler.*;
-import co.com.sofka.api.player.handler.CreatePlayerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -51,6 +50,10 @@ public class RouterGameRest {
         return route(POST("/api/game/end-game"), endGameHandler::endGame);
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> routerRetirePlayer(RetirePlayerHandler retirePlayerHandler) {
+        return route(POST("/api/game/{id}"), retirePlayerHandler::retirePlayer);
+    }
 
 
 
