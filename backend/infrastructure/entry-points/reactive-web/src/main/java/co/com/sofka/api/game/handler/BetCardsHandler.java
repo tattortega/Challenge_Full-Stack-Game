@@ -2,8 +2,6 @@ package co.com.sofka.api.game.handler;
 
 import co.com.sofka.model.game.Game;
 import co.com.sofka.usecase.game.betcard.BetCardUseCase;
-import co.com.sofka.usecase.game.distributecards.DistributeCardsUseCase;
-import co.com.sofka.usecase.game.startgame.StartGameUseCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,21 +12,19 @@ import reactor.core.publisher.Mono;
 
 @Component
 @RequiredArgsConstructor
-public class StartGameHandler {
+public class BetCardsHandler {
 
-    private final StartGameUseCase startGameUseCase;
-    private final DistributeCardsUseCase distributeCardsUseCase;
     private final BetCardUseCase betCardUseCase;
 
-    public Mono<ServerResponse> startGame(ServerRequest serverRequest) {
+    public Mono<ServerResponse> betCards(ServerRequest serverRequest) {
+        var id = serverRequest.pathVariable("id");
+
         return serverRequest
                 .bodyToMono(Game.class)
-                .flatMap(startGameUseCase::apply)
-                .flatMap(distributeCardsUseCase::apply)
                 .flatMap(game -> ServerResponse
                         .status(HttpStatus.CREATED)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .bodyValue(game));
+                        .body(betCardUseCase.apply(game, id), Game.class));
     }
 
 }

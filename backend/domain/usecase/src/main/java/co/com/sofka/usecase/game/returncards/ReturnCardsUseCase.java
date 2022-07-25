@@ -21,23 +21,12 @@ public class ReturnCardsUseCase implements BiFunction<Game, String, Mono<Game>> 
     @Override
     public Mono<Game> apply(Game game, String idPlayer) {
 
-        Flux.fromIterable(game.getPlayers())
-                .takeUntil(player -> player.getId().equals(idPlayer))
-                .map(player -> player.getCards())
-                .map(cards -> {
-                    List<Card> cards1 = new ArrayList<>(game.getCards());
-                    cards1.addAll(cards);
-                    game.setCards(cards1);
-                    return game;
-                });
-
-        Flux.fromIterable(game.getPlayers()).takeUntil(player -> player.getId().equals(idPlayer))
+        return gameRepository.findById(game.getId())
+                        .map(game1 -> game1.getPlayers().stream().findFirst().get())
                 .map(player -> {
+                    game.getCards().addAll(player.getCards());
                     player.setCards(new HashSet<>());
                     return game;
-                }).subscribe();
-
-        return gameRepository.save(game);
-
+                }).flatMap(gameRepository::save);
     }
 }

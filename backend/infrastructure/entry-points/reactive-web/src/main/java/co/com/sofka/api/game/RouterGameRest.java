@@ -55,6 +55,15 @@ public class RouterGameRest {
         return route(POST("/api/game/{id}"), retirePlayerHandler::retirePlayer);
     }
 
+    @Bean
+    public RouterFunction<ServerResponse> routerBetCards(BetCardsHandler betCardsHandler) {
+        return route(POST("/api/game/bet-card/{id}"), betCardsHandler::betCards);
+    }
 
+    @Bean
+    public RouterFunction<ServerResponse> routerComparateCards(ComparateCardsHandler comparateCardsHandler) {
+        return RouterFunctions.route(
+                POST("/api/game/comparate-cards").and(contentType(APPLICATION_JSON)), comparateCardsHandler::comparateCards);
+    }
 
 }

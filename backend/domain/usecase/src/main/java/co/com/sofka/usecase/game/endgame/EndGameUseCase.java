@@ -13,18 +13,19 @@ import java.util.function.Function;
 public class EndGameUseCase implements Function<Game, Mono<Game>> {
 
     private final GameRepository gameRepository;
-    private final PlayerRepository playerRepository;
     private final ReturnCardsUseCase returnCardsUseCase;
 
     @Override
     public Mono<Game> apply(Game game) {
 
-        return gameRepository.findById(game.getId())
+        gameRepository.findById(game.getId())
                 .map(game1 -> {
                     game1.getPlayers().stream().findFirst().get().setScore(100);
-                    returnCardsUseCase.apply(game1, game1.getPlayers().stream().findFirst().get().getId());
                     return game1;
-                }).flatMap(gameRepository::save);
+                }).flatMap(game1 -> returnCardsUseCase.apply(game1, game1.getPlayers().stream().findFirst().get().getId()))
+        .flatMap(gameRepository::save).subscribe();
+
+        return gameRepository.save(game);
 
     }
 }

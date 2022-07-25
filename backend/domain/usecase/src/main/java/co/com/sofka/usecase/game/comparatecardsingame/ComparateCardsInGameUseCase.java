@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ComparateCardsInGameUseCase implements Function<Game, Mono<Game>> {
 
-    private final GameRepository gameRepository;
     private final AssignWinnerRoundUseCase assignWinnerRoundUseCase;
 
     @Override

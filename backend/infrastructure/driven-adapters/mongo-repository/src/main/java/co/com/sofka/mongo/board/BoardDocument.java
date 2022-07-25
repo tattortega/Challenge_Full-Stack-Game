@@ -16,5 +16,5 @@ public class BoardDocument {
     @Id
     private String id;
     private Map<String, Card> cardsBetPlayers;
-    private Map<String, Boolean> turn;
+    private Map<Integer, Player> turn;
 }

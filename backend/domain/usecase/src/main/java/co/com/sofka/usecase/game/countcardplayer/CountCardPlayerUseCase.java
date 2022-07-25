@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CountCardPlayerUseCase implements Function<Game, Mono<Game>> {
 
-    //private final GameRepository gameRepository;
+    private final GameRepository gameRepository;
     private final RemovePlayerUseCase removePlayerUseCase;
 
     @Override
@@ -26,6 +26,8 @@ public class CountCardPlayerUseCase implements Function<Game, Mono<Game>> {
                 .filter(player -> player.getCards().isEmpty())
                 .collect(Collectors.toSet());
 
-        return removePlayerUseCase.apply(game, playersWhitoutCards);
+        return gameRepository.save(game)
+                .flatMap(game1 -> removePlayerUseCase.apply(game1, playersWhitoutCards))
+                .flatMap(gameRepository::save);
     }
 }

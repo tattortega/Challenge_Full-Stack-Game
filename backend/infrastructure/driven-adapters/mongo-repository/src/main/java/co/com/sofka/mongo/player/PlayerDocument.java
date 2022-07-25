@@ -17,5 +17,6 @@ public class PlayerDocument {
     private String id;
     private Integer score;
     private Set<Card> cards;
+    private Boolean turn;
     private User user;
 }
