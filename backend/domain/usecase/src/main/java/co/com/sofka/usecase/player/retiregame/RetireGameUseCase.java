@@ -10,6 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
@@ -22,17 +23,27 @@ public class RetireGameUseCase implements BiFunction<String, Game, Mono<Game>> {
     @Override
     public Mono<Game> apply(String idPlayer, Game game) {
 
-        returnCardsUseCase.apply(game, idPlayer);
+        return returnCardsUseCase.apply(game, idPlayer)
+                .map(game1 -> {
+                    Flux.fromIterable(game1.getPlayers())
+                            .filter(player -> player.getId().equals(idPlayer))
+                            .map(player -> {
+                                Set<Player> playerSet = new HashSet<>(game1.getPlayers());
+                                playerSet.remove(player);
+                                game1.setPlayers(playerSet);
+                                AtomicInteger index = new AtomicInteger();
+                                index.getAndIncrement();
+                                Map<Integer, Player> playersTurn= new HashMap<>();
+                                game1.getBoard().getTurn().forEach((i, player1) -> {
+                                    if(!player1.getId().equals(idPlayer)){
+                                        playersTurn.put(index.getAndIncrement(), player1);
+                                    }
+                                });
+                                game1.getBoard().setTurn(playersTurn);
+                                return game1;
+                            }).subscribe();
+                    return game1;
+                }).flatMap(gameRepository::save);
 
-        Flux.fromIterable(game.getPlayers())
-                .takeUntil(player -> player.getId().equals(idPlayer))
-                .map(player -> {
-                    Set<Player> playerSet = new HashSet<>(game.getPlayers());
-                    playerSet.remove(player);
-                    game.setPlayers(playerSet);
-                    return game;
-                }).subscribe();
-
-        return gameRepository.save(game);
     }
 }
