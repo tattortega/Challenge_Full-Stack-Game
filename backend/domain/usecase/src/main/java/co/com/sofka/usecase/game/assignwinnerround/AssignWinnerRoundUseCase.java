@@ -29,6 +29,10 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
 
         Flux.fromIterable(game.getPlayers())
                 .filter(player -> player.getId().equals(idWinner))
+                .map(player -> {
+                    game.getBoard().setWinnerRound(player);
+                    return player;
+                })
                 .map(player -> betCards.stream()
                         .map(card -> {
                             player.getCards().add(card);

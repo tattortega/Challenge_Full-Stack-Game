@@ -1,6 +1,6 @@
 package co.com.sofka.api.player;
 
-import co.com.sofka.api.game.handler.GetPlayerHandler;
+import co.com.sofka.api.player.handler.GetPlayerHandler;
 import co.com.sofka.api.player.handler.CreatePlayerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

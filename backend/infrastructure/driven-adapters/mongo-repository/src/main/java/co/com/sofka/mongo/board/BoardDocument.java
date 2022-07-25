@@ -17,4 +17,5 @@ public class BoardDocument {
     private String id;
     private Map<String, Card> cardsBetPlayers;
     private Map<Integer, Player> turn;
+    private Player winnerRound;
 }

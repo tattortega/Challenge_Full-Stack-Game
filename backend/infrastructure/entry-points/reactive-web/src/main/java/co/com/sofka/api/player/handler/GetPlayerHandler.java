@@ -1,4 +1,4 @@
-package co.com.sofka.api.game.handler;
+package co.com.sofka.api.player.handler;
 
 import co.com.sofka.usecase.player.getplayer.GetPlayerUseCase;
 import lombok.RequiredArgsConstructor;

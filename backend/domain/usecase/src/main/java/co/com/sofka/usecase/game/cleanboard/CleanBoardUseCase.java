@@ -32,6 +32,7 @@ public class CleanBoardUseCase implements Function<Game, Mono<Game>> {
         Board board = new Board();
         board.setId(game.getBoard().getId());
         board.setCardsBetPlayers(new HashMap<>());
+        board.setWinnerRound(game.getBoard().getWinnerRound());
 
         Map<Integer, Player> turns = new HashMap<>();
         AtomicInteger index = new AtomicInteger();
