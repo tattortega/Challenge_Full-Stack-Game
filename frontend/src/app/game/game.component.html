@@ -1,0 +1,42 @@
+<div class="container" cdkDropListGroup>
+  <div class="cardsBet">
+    <span>Tiempo: {{contador}}</span>
+    <h1>Cartas Apostadas</h1>
+    <div
+      class="card-list-bet"
+      cdkDropList
+      [cdkDropListData]="myList"
+      (cdkDropListDropped)="dropOnList($event)"
+    >
+      <div
+        class="card-item"
+        *ngFor="let card of myList"
+        cdkDrag
+        [cdkDragData]="card"
+      >
+        <img [src]="card.image" alt="" width="100rem" height="120rem"/>
+        {{card.description}}
+      </div>
+    </div>
+  </div>
+  <div class="cardsPlayer">
+    <h1>Cartas del Jugador</h1>
+    <br>
+    <div class="card-list" cdkDropList [cdkDropListData]="cards">
+      <cdk-virtual-scroll-viewport itemSize="5">
+        <div
+          class="card-item"
+          *ngFor="let card of cards"
+          cdkDrag
+          [cdkDragData]="card"
+        >
+          {{card.power}}
+          <img [src]="url" alt="" width="100rem" height="120rem" />
+          {{card.description}}
+          <br><br>
+        </div>
+      </cdk-virtual-scroll-viewport>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
