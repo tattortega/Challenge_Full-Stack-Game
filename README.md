@@ -30,7 +30,8 @@ arquitectura limpia - SofkaU
 + npm run start
 
 
-### Análisis
+### Análisis del dominio
+![Marvel-card drawio](https://user-images.githubusercontent.com/83563182/181037765-adde982b-7dcb-430f-90f5-6f5e7e858ddd.png)
 
 
 ### Desarrolladores
