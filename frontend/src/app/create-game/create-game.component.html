@@ -1,2 +1,13 @@
-<input type="button" value="Crear Juego" (click) = "create()">
+<body>
+<div class="container mt-3">
+  <h2>Juego de Cartas</h2>
+  <div class="mt-4 p-5 bg-primary text-white rounded">
+    <h1>Creación del Juego</h1>
+    <p>Este juego de cartas permite que varios jugadores interactuen mediante la apuesta de una conjunto de cartas que serán asignadas a cada uno de ellos de manera 		aleatoria, dependiendo del poder que tiene cada carta, se obtiene el ganador de la ronda, gana el juego el jugador que obtenga todas las cartas de sus oponentes,
+      cuando un jugador se quede sin cartas, será eliminado del juego. </p>
+    <p>INICIEMOS...</p>
+    <button routerLink="" class="btn btn-danger btn-lg rounded-pill pe-5 ps-5" (click) = "create()">Crear Juego</button>
+  </div>
+</div>
+</body>
 <router-outlet></router-outlet>

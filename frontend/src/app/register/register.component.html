@@ -1,20 +1,4 @@
-<!-- <br>
-
-<div class="formGroup">
-
-  <input type="email" class="formControl" placeholder="Email" #userEmail required />
-
-</div>
-<br>
-<div class="formGroup">
-  <input type="password" class="formControl" placeholder="Password" #userPwd required />
-</div>
-<br>
-
-<div class="formGroup">
-  <input type="button" class="btn btnPrimary" value="Sign Up"
-    (click)="serviceAuth.SignUp(userEmail.value, userPwd.value)" />
-</div> -->
+<body>
 <div class="section">
   <div class="container">
     <div class="row full-height justify-content-center">
@@ -41,7 +25,6 @@
                     </div>
                     <input type="submit" class="btn mt-4" value="Sign In"
                       (click)="serviceAuth.SignIn(userEmail.value, userPwd.value)" />
-                    <p class="mb-0 mt-4 text-center"><a href="#0" class="link">Forgot your password?</a></p>
                   </div>
                 </div>
               </div>
@@ -71,4 +54,5 @@
     </div>
   </div>
 </div>
+</body>
 <router-outlet></router-outlet>
