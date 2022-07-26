@@ -26,6 +26,11 @@ public class RouterGameRest {
     }
 
     @Bean
+    public RouterFunction<ServerResponse> routerSDistributeCardsFunction(DistributeCardsInGameHandler distributeCardsInGameHandler) {
+        return route(POST("/api/game/distribute-cards"), distributeCardsInGameHandler::distributeCards);
+    }
+
+    @Bean
     public RouterFunction<ServerResponse> routerGetGameFunction(GetGameHandler getGameHandler) {
         return route(GET("/api/game/{id}"), getGameHandler::getGame);
     }

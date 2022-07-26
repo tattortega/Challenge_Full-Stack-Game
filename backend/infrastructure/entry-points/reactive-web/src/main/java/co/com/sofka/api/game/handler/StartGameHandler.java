@@ -18,7 +18,7 @@ public class StartGameHandler {
 
     private final StartGameUseCase startGameUseCase;
     private final DistributeCardsUseCase distributeCardsUseCase;
-    private final BetCardUseCase betCardUseCase;
+//    private final BetCardUseCase betCardUseCase;
 
     public Mono<ServerResponse> startGame(ServerRequest serverRequest) {
         return serverRequest
