@@ -1,12 +1,7 @@
 package co.com.sofka.usecase.card.getallcard;
 
-import co.com.sofka.model.board.Board;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.card.gateways.CardRepository;
-import co.com.sofka.model.game.Game;
-import co.com.sofka.model.game.gateways.GameRepository;
-import co.com.sofka.model.player.Player;
-import co.com.sofka.usecase.game.cleanboard.CleanBoardUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,23 +10,14 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.test.StepVerifier;
 
-import java.util.*;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class GetAllCardUseCaseTest {
-
-
-
     @SpyBean
     GetAllCardUseCase getAllCardUseCase;
     @MockBean
     CardRepository cardRepository;
-
-
 
     @BeforeEach
     void setUp() {
@@ -60,10 +46,8 @@ class GetAllCardUseCaseTest {
                 Mono.just(card6), Mono.just(card7), Mono.just(card8), Mono.just(card9), Mono.just(card10));
         when(cardRepository.findAll()).thenReturn(cardsGame);
 
-
         var list = getAllCardUseCase.get();
 
-        Assertions.assertEquals(list.count().block(),10);
-
+        Assertions.assertEquals(list.count().block(), 10);
     }
 }

@@ -12,6 +12,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Documento para el modelo Game
+ *
+ * @author Jhon Edward Acevedo <jhedacro@gmail.com>
+ * @author Oscar Gabriel Farfan <oscarfarfan92@gmail.com>
+ * @author Luis Ricardo Ortega <tattortega.28@gmail.com>
+ * @version 1.0.0 2022-07-26
+ * @since 1.0.0
+ */
 @Data
 @Document(value = "games")
 public class GameDocument {

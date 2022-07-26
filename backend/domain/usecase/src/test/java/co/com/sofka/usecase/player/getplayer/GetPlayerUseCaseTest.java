@@ -1,11 +1,9 @@
 package co.com.sofka.usecase.player.getplayer;
 
-import co.com.sofka.model.board.Board;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.player.Player;
 import co.com.sofka.model.player.gateways.PlayerRepository;
 import co.com.sofka.model.user.User;
-import co.com.sofka.usecase.player.createplayer.CreatePlayerUseCase;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,7 +15,6 @@ import reactor.test.StepVerifier;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class GetPlayerUseCaseTest {

@@ -25,16 +25,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class ComparateCardsInGameUseCaseTest {
-
-
     @SpyBean
     ComparateCardsInGameUseCase comparateCardsInGameUseCase;
     @MockBean
     AssignWinnerRoundUseCase assignWinnerRoundUseCase;
     @MockBean
     GameRepository gameRepository;
-
-
 
     @BeforeEach
     void setUp() {

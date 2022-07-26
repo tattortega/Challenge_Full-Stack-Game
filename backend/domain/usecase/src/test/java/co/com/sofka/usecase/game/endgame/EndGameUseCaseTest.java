@@ -22,16 +22,12 @@ import static org.mockito.Mockito.*;
 
 class EndGameUseCaseTest {
 
-
-
     @SpyBean
     EndGameUseCase endGameUseCase;
     @MockBean
     ReturnCardsUseCase returnCardsUseCase;
     @MockBean
     GameRepository gameRepository;
-
-
 
     @BeforeEach
     void setUp() {

@@ -29,8 +29,6 @@ class AssignWinnerRoundUseCaseTest {
     @MockBean
     CountCardPlayerUseCase countCardPlayerUseCase;
 
-
-
     @BeforeEach
     void setUp() {
         gameRepository = mock(GameRepository.class);

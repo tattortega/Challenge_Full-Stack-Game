@@ -40,7 +40,6 @@ class DistributeCardsUseCaseTest {
     @MockBean
     PlayerRepository playerRepository;
 
-
     @BeforeEach
     void setUp() {
         gameRepository = mock(GameRepository.class);

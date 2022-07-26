@@ -21,15 +21,12 @@ import static org.mockito.Mockito.*;
 
 class RemovePlayerUseCaseTest {
 
-
     @SpyBean
     RemovePlayerUseCase removePlayerUseCase;
     @MockBean
     CleanBoardUseCase cleanBoardUseCase;
     @MockBean
     GameRepository gameRepository;
-
-
 
     @BeforeEach
     void setUp() {

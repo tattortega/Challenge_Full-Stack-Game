@@ -21,16 +21,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class CountCardPlayerUseCaseTest {
-
-
     @SpyBean
     CountCardPlayerUseCase countCardPlayerUseCase;
     @MockBean
     RemovePlayerUseCase removePlayerUseCase;
     @MockBean
     GameRepository gameRepository;
-
-
 
     @BeforeEach
     void setUp() {

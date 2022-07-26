@@ -1,6 +1,5 @@
 package co.com.sofka.usecase.player.retiregame;
 
-import co.com.sofka.model.card.Card;
 import co.com.sofka.model.game.Game;
 import co.com.sofka.model.game.gateways.GameRepository;
 import co.com.sofka.model.player.Player;
@@ -12,14 +11,29 @@ import reactor.core.publisher.Mono;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
+/**
+ * Caso de uso para cuando un jugador se retira del juego
+ *
+ * @author Jhon Edward Acevedo <jhedacro@gmail.com>
+ * @author Oscar Gabriel Farfan <oscarfarfan92@gmail.com>
+ * @author Luis Ricardo Ortega <tattortega.28@gmail.com>
+ * @version 1.0.0 2022-07-26
+ * @since 1.0.0
+ */
 @RequiredArgsConstructor
 public class RetireGameUseCase implements BiFunction<String, Game, Mono<Game>> {
 
     private final GameRepository gameRepository;
     private final ReturnCardsUseCase returnCardsUseCase;
 
+    /**
+     * Metodo que obtiene el jugador que se retira y obtiene sus cartas para retornarlas al mazo del juego
+     *
+     * @param idPlayer String
+     * @param game Game
+     * @return Mono<Game>
+     */
     @Override
     public Mono<Game> apply(String idPlayer, Game game) {
 
@@ -33,9 +47,9 @@ public class RetireGameUseCase implements BiFunction<String, Game, Mono<Game>> {
                                 game1.setPlayers(playerSet);
                                 AtomicInteger index = new AtomicInteger();
                                 index.getAndIncrement();
-                                Map<Integer, Player> playersTurn= new HashMap<>();
+                                Map<Integer, Player> playersTurn = new HashMap<>();
                                 game1.getBoard().getTurn().forEach((i, player1) -> {
-                                    if(!player1.getId().equals(idPlayer)){
+                                    if (!player1.getId().equals(idPlayer)) {
                                         playersTurn.put(index.getAndIncrement(), player1);
                                     }
                                 });

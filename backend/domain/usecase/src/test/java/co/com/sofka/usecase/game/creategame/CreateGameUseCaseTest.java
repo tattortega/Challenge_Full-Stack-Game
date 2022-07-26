@@ -7,16 +7,9 @@ import co.com.sofka.model.game.gateways.GameRepository;
 import co.com.sofka.model.player.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mockito;
-import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.autoconfigure.web.reactive.WebFluxTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.test.StepVerifier;
 
@@ -25,11 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-//@WebFluxTest
-//@ExtendWith(MockitoExtension.class)
 class CreateGameUseCaseTest {
 
     @SpyBean
@@ -39,7 +29,7 @@ class CreateGameUseCaseTest {
 
 
     @BeforeEach
-    public void setup(){
+    public void setup() {
         gameRepository = mock(GameRepository.class);
         createGameUseCase = new CreateGameUseCase(gameRepository);
     }
@@ -50,7 +40,7 @@ class CreateGameUseCaseTest {
         Set<Player> players = new HashSet<>();
         Board board = new Board();
 
-        Game game = new Game("1",0,players,board,cards);
+        Game game = new Game("1", 0, players, board, cards);
         Mono<Game> gameMono = Mono.just(game);
 
         when(gameRepository.save(Mockito.any(Game.class))).thenReturn(gameMono);

@@ -22,16 +22,12 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.times;
 
 class CleanBoardUseCaseTest {
-
-
     @SpyBean
     CleanBoardUseCase cleanBoardUseCase;
     @MockBean
     EndGameUseCase endGameUseCase;
     @MockBean
     GameRepository gameRepository;
-
-
 
     @BeforeEach
     void setUp() {

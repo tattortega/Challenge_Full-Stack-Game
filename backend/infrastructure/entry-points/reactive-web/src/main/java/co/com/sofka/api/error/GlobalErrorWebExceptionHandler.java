@@ -16,6 +16,15 @@ import reactor.core.publisher.Mono;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * Manejo de excepciones en el handler y routes
+ *
+ * @author Jhon Edward Acevedo <jhedacro@gmail.com>
+ * @author Oscar Gabriel Farfan <oscarfarfan92@gmail.com>
+ * @author Luis Ricardo Ortega <tattortega.28@gmail.com>
+ * @version 1.0.0 2022-07-26
+ * @since 1.0.0
+ */
 @Component
 @Order(-2)
 public class GlobalErrorWebExceptionHandler
