@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
 
     private final GameRepository gameRepository;
-    private final PlayerRepository playerRepository;
 
 
     @Override
@@ -36,15 +35,13 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
                     .board(game1.getBoard())
                     .cards(removeCard(cardSet, game.getCards()))
                     .build();
-            Player player1 = player.toBuilder()
+            return player.toBuilder()
                     .id(player.getId())
                     .score(player.getScore())
                     .user(player.getUser())
                     .cards(cardSet)
                     .turn(player.getTurn())
                     .build();
-            playerRepository.save(player1).subscribe();
-            return player1;
         }).collect(Collectors.toSet());
 
         return gameRepository.findById(game.getId())
