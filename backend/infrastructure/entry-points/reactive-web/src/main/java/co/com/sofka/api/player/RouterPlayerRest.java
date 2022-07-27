@@ -1,5 +1,6 @@
 package co.com.sofka.api.player;
 
+import co.com.sofka.api.player.handler.GetAllPlayersHandler;
 import co.com.sofka.api.player.handler.GetPlayerHandler;
 import co.com.sofka.api.player.handler.CreatePlayerHandler;
 import org.springframework.context.annotation.Bean;
@@ -43,6 +44,17 @@ public class RouterPlayerRest {
     @Bean
     public RouterFunction<ServerResponse> routerGetPlayerFunction(GetPlayerHandler getPlayerHandler) {
         return route(GET("/api/player/{id}"), getPlayerHandler::getPlayer);
+    }
+
+    /**
+     * Ruta para obtener todos los jugadores
+     *
+     * @param getAllPlayersHandler Handler
+     * @return RouterFunction<ServerResponse>
+     */
+    @Bean
+    public RouterFunction<ServerResponse> routerFindAllPlayersFunction(GetAllPlayersHandler getAllPlayersHandler) {
+        return route(GET("/api/players"), getAllPlayersHandler::findAllPlayers);
     }
 
 }
