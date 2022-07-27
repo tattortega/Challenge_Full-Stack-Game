@@ -6,6 +6,7 @@ import { GameService } from '../game.service';
 import { PlayersService } from '../players.service';
 import { CreateGameComponent } from '../create-game/create-game.component';
 import { Router } from '@angular/router';
+import { ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-start-game',
@@ -15,7 +16,8 @@ import { Router } from '@angular/router';
 export class StartGameComponent implements OnInit {
 
   game: Game;
-  playersGame: Player[];
+  partidaId :string;
+  playersGame: Player[] = [];
   board: Board = {
     id: "1",
     cardsBetPlayers: null,
@@ -23,16 +25,22 @@ export class StartGameComponent implements OnInit {
     winnerRound: null
   }
 
-  constructor(private gameService: GameService, private playerService:PlayersService, private router:Router) { }
+  constructor(private gameService: GameService, private playerService:PlayersService, private router:Router,
+  private routeActive:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.partidaId = this.routeActive.snapshot.paramMap.get("id");
     this.playerService.getPlayers().subscribe(players => this.playersGame = players);
   }
 
   start(): void {
-    this.gameService.startGame({id:"1233", round:0, players:this.playersGame, cards:[], board:this.board} as Game)
-      .subscribe(game => this.game = game);
-    this.router.navigate(['apuesta']);
+    this.gameService.startGame({id:this.partidaId, round:0, players:this.playersGame, cards:[], board:this.board} as Game)
+      .subscribe(game => {
+        this.game = game;
+        this.partidaId = game.id;
+      });
+    this.router.navigate([`apuesta`]);
+
   }
 
 }

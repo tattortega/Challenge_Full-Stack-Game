@@ -14,16 +14,16 @@ export class GameService {
 
   constructor(private httpClient: HttpClient, private router:Router) { }
 
-  createGame(game: Game): Observable<Game> {
-    return this.httpClient.post<Game>(this.gameCreateUrl, game, this.httpOptions);
+  createGame(game: Game): Observable<any> {
+    return this.httpClient.post(this.gameCreateUrl, game, this.httpOptions);
   }
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  startGame(game: Game): Observable<Game> {
-    return this.httpClient.post<Game>(this.gameStartUrl, game, this.httpOptions);
+  startGame(game: Game): Observable<any> {
+    return this.httpClient.post(this.gameStartUrl, game, this.httpOptions);
   }
 
 }

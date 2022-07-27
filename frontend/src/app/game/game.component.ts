@@ -4,6 +4,8 @@ import { interval } from 'rxjs';
 import { Card } from '../app.interface-card';
 import { Player } from '../app.interface-player';
 import { PlayersService } from '../players.service';
+import { ActivatedRoute} from "@angular/router";
+
 
 @Component({
   selector: 'app-game',
@@ -69,16 +71,16 @@ export class GameComponent implements OnInit {
   }];
 
   myList: Card[] = [];
-
+  partidaId: string;
   contador: number = 0;
   url: string = "";
   players: Player[] = [];
 
-  constructor(private playersService: PlayersService) {
+  constructor(private playersService: PlayersService, private routeActive: ActivatedRoute ) {
   }
 
   ngOnInit(): void {
-
+    this.partidaId = this.routeActive.snapshot.paramMap.get("id");
     this.myList = [];
     this.url = this.cards[0].image;
     const obs$ = interval(4000);

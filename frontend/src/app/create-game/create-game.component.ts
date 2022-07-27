@@ -11,17 +11,21 @@ import { GameService } from '../game.service';
 export class CreateGameComponent implements OnInit {
 
     @Input() game: Game;
+    partidaId : string;
 
   constructor(private gameService: GameService, private router:Router) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   create(): void {
     this.gameService.createGame({round:0, players:[], cards:[], board:null } as Game)
-      .subscribe(game => this.game = game);
-    this.router.navigate(['iniciar']);
-    console.log(this.game);
+      .subscribe(game => {
+        this.partidaId = game.id;
+        console.log(game);
+        this.router.navigate([`iniciar/${this.partidaId}`]);
+      });
+    // console.log(this.partidaId)
+    // this.router.navigate([`iniciar/${this.partidaId}`]);
   }
 
 }

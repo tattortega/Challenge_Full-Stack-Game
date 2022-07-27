@@ -12,9 +12,9 @@ export class PlayersService {
 
   constructor(private http: HttpClient) { }
 
-  public getPlayers(): Observable<Player[]> {
-    let header = new HttpHeaders().set('Type-content','aplication/json')
-    return this.http.get<Player[]>(this.playersUrl, {headers: header});
+  public getPlayers(): Observable<any> {
+    let header = new HttpHeaders().set('Type-content','application/json')
+    return this.http.get(this.playersUrl, {headers: header});
   }
 
 }
