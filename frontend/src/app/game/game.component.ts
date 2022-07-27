@@ -69,6 +69,7 @@ export class GameComponent implements OnInit {
   //   feature: "descripción3",
   //   level: 5
   // }];
+  game2: string = "";
   game: Game
   cards: Card[]
   myList: Card[] = [];
@@ -80,8 +81,8 @@ export class GameComponent implements OnInit {
   constructor(
     private playersService: PlayersService,
     private gameService: GameService,
-    private routeActive: ActivatedRoute ) {
-  }
+    private routeActive: ActivatedRoute)
+  {}
 
   ngOnInit(): void {
     this.partidaId = this.routeActive.snapshot.paramMap.get("id");
@@ -91,20 +92,20 @@ export class GameComponent implements OnInit {
     //   this.contador = a;
     //   this.url = this.cards[a].image;
     // });
-  //   interval(2000).subscribe(card =>{
-  //     this.cards = this.game.players[0].cards;
-  //     this.url = this.cards[0].image;
-  //   }
+    // interval(2000).subscribe(card =>{
+    //   this.cards = this.game.players[0].cards;
+    //   this.url = this.cards[0].image;
+    // }
   // )
     this.getGame();
-
   }
 
   getGame(): void {
-    this.gameService.getGame(this.partidaId).subscribe(game => {
-      console.log("game"+game)
-        this.game = game;
-        console.log(this.game)
+    this.gameService.getGame(this.partidaId).subscribe(games => {
+      console.log("game"+games)
+        this.game = games;
+      this.game2 = games.id;
+      console.log(this.game)
     });
   }
 
