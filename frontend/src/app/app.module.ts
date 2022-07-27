@@ -8,22 +8,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { CreateGameComponent } from './create-game/create-game.component';
 import { RouterModule, Routes } from '@angular/router';
 import { StartGameComponent } from './start-game/start-game.component';
-import { LoginComponent } from './login/login.component';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireModule } from '@angular/fire/compat';
 import { environment } from 'src/environments/environment';
 import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreModule } from '@angular/fire/compat/firestore';
-import { RegisterComponent } from './register/register.component';
+import { RegisterLoginComponent } from './register-login/register-login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GameComponent } from './game/game.component';
 
-// const routes: Routes = [
-//   { path: '', redirectTo: '/registro', pathMatch: 'full' },
-//   { path: 'crear', component: CreateGameComponent },
-//   { path: 'iniciar', component: StartGameComponent },
-//   { path: 'registro', component: RegisterComponent },
-//   { path: 'login', component: LoginComponent },
-// ];
 
 @NgModule({
   declarations: [
@@ -31,8 +23,7 @@ import { GameComponent } from './game/game.component';
     GameComponent,
     CreateGameComponent,
     StartGameComponent,
-    LoginComponent,
-    RegisterComponent
+    RegisterLoginComponent
   ],
   imports: [
     BrowserModule,

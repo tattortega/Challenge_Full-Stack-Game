@@ -3,3 +3,6 @@ body{
   background-image: url("../../assets/Universo_Marvel.webp");
   background-size: cover ;
 }
+h2{
+  text-align: center;
+}

@@ -1,7 +1,7 @@
 import { Card } from "./app.interface-card";
 
 export interface Player {
-  id: string;
+  id?: string;
   score: number;
   cards: Card[];
   turn: boolean;

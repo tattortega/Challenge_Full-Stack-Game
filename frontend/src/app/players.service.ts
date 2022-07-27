@@ -2,19 +2,38 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from './app.interface-player';
 import { Observable } from 'rxjs';
+import {Card} from "./app.interface-card";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersService {
 
-  private playersUrl: string = '/api/players';
+  private playersUrl: string = '/api/player';
+
 
   constructor(private http: HttpClient) { }
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
+
   public getPlayers(): Observable<any> {
-    let header = new HttpHeaders().set('Type-content','application/json')
-    return this.http.get(this.playersUrl, {headers: header});
+    return this.http.get(this.playersUrl, this.httpOptions);
+  }
+
+  public getPlayer(uid:string): Observable<any> {
+    return this.http.get(`${this.playersUrl}/user/${uid}`, this.httpOptions);
+  }
+
+  public createPlayer(uid:string): Observable<any> {
+    const data: Player = {
+      score: 0,
+      cards: [],
+      turn: false,
+      user: uid
+    }
+    return this.http.post(this.playersUrl, data, this.httpOptions);
   }
 
 }

@@ -3,10 +3,10 @@ import { AuthenticationService } from '../authentication.service';
 
 @Component({
   selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  templateUrl: './register-login.component.html',
+  styleUrls: ['./register-login.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterLoginComponent implements OnInit {
 
   constructor(public serviceAuth: AuthenticationService) { }
 

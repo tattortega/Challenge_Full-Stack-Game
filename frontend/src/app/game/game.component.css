@@ -1,40 +1,8 @@
-/* .container {
-  padding: 8vw;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5em;
+body{
+  /*height: 560px;*/
+  background-image: url("../../assets/1615546576_319724_1615546812_noticia_normal.jpg");
+  background-size: cover;
 }
-
-.cardsBet {
-  width: 50vw;
-  height: 100%;
-  border: 1px solid #1d90ce;
-  border-radius: 8px;
-  text-align: center;
-  color: #1d90ce;
-}
-
-.cardsPlayer {
-  width: 20vw;
-  height: 100%;
-  border: 1px solid #1d90ce;
-  border-radius: 8px;
-  text-align: center;
-  color: #1d90ce;
-}
-
-.card-list {
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 1em;
-  height: 100%;
-}
-.card__item img {
-  width: 100%;
-  object-fit: cover;
-} */
 .container {
   padding: 90px;
   width: 100vw;
@@ -51,6 +19,7 @@
   border-radius: 8px;
   text-align: center;
   color: #1d90ce;
+  background: black;
 }
 
 .cardsPlayer {
@@ -60,6 +29,7 @@
   border-radius: 8px;
   text-align: center;
   color: #1d90ce;
+  background: black;
 }
 
 .cards {

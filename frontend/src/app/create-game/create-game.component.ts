@@ -24,8 +24,7 @@ export class CreateGameComponent implements OnInit {
         console.log(game);
         this.router.navigate([`iniciar/${this.partidaId}`]);
       });
-    // console.log(this.partidaId)
-    // this.router.navigate([`iniciar/${this.partidaId}`]);
+
   }
 
 }

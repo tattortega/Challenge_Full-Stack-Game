@@ -1,9 +1,10 @@
-import { Injectable } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { ActivatedRoute, Route, Router, RouterLink } from '@angular/router';
+import {Injectable, NgZone} from '@angular/core';
+import {AngularFireAuth} from '@angular/fire/compat/auth';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
+import {ActivatedRoute, Route, Router, RouterLink} from '@angular/router';
 import * as auth from 'firebase/auth';
-import { User } from './app.interface-user';
+import {User} from './app.interface-user';
+import {PlayersService} from "./players.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,12 @@ export class AuthenticationService {
 
   userData: any;
 
-  constructor(public afAuth: AngularFireAuth, public afs: AngularFirestore, private router: Router) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    public afs: AngularFirestore,
+    private router: Router,
+    public ngZone: NgZone,
+    private playerService: PlayersService) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
         this.userData = user;
@@ -23,9 +29,9 @@ export class AuthenticationService {
         JSON.parse(localStorage.getItem('user')!);
       }
     });
-   }
+  }
 
-  SignIn(email: string, password:string) {
+  SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -64,10 +70,12 @@ export class AuthenticationService {
     return this.afAuth
       .signInWithPopup(provider)
       .then((result) => {
-        // this.ngZone.run(() => {
-        //   this.router.navigate(['dashboard']);
-        // });
+        this.ngZone.run(() => {
+          this.router.navigate(['crear']);
+        });
         this.SetUserData(result.user);
+        // if ()
+        this.newPlayer(result.user!.uid);
       })
       .catch((error) => {
         window.alert(error);
@@ -77,7 +85,7 @@ export class AuthenticationService {
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
       if (res) {
-        // this.router.navigate(['dashboard']);
+        this.router.navigate(['crear']);
       }
     });
   }
@@ -86,12 +94,24 @@ export class AuthenticationService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        /* Call the SendVerificaitonMail() function when new user sign
-        up and returns promise */
         this.SetUserData(result.user);
+        alert("Registro exitoso")
+        document.getElementById("reg-log").click();
+        this.newPlayer(result.user!.uid);
       })
       .catch((error) => {
         window.alert(error.message);
       });
+  }
+
+  newPlayer(uid:string){
+    this.playerService.getPlayer(uid).subscribe(data => {
+      localStorage.setItem('player', JSON.stringify(data));
+    }, error => {
+      this.playerService.createPlayer(uid).subscribe(data => {
+        localStorage.setItem('player', JSON.stringify(data));
+      })
+    })
+
   }
 }
