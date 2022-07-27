@@ -1,7 +1,6 @@
 package co.com.sofka.mongo.player;
 
 import co.com.sofka.model.card.Card;
-import co.com.sofka.model.user.User;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,5 +24,5 @@ public class PlayerDocument {
     private Integer score;
     private Set<Card> cards;
     private Boolean turn;
-    private User user;
+    private String user;
 }

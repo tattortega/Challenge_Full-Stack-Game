@@ -1,7 +1,9 @@
 package co.com.sofka.mongo.player;
 
+import co.com.sofka.model.player.Player;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
+import reactor.core.publisher.Mono;
 
 /**
  * Interfaz del repositorio de Mongo Reactive del documento Player
@@ -13,4 +15,6 @@ import org.springframework.data.repository.query.ReactiveQueryByExampleExecutor;
  * @since 1.0.0
  */
 public interface MongoDBRepositoryPlayer extends ReactiveMongoRepository<PlayerDocument, String>, ReactiveQueryByExampleExecutor<PlayerDocument> {
+
+    Mono<Player> findByUser(String uid);
 }

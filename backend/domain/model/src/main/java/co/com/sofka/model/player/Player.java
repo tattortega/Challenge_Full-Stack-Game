@@ -1,6 +1,6 @@
 package co.com.sofka.model.player;
+
 import co.com.sofka.model.card.Card;
-import co.com.sofka.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,7 +26,7 @@ public class Player {
     private Integer score;
     private Set<Card> cards;
     private Boolean turn;
-    private User user;
+    private String user;
 
 
 }

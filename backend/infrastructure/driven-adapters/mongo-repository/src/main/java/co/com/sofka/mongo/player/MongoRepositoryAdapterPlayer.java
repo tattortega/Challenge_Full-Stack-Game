@@ -5,6 +5,7 @@ import co.com.sofka.model.player.gateways.PlayerRepository;
 import co.com.sofka.mongo.helper.AdapterOperations;
 import org.reactivecommons.utils.ObjectMapper;
 import org.springframework.stereotype.Repository;
+import reactor.core.publisher.Mono;
 
 /**
  * Adaptador del repositorio de Player para las operaciones en la base de datos
@@ -27,5 +28,10 @@ public class MongoRepositoryAdapterPlayer extends AdapterOperations<Player, Play
          *  Or using mapper.map with the class of the object model
          */
         super(repository, mapper, d -> mapper.map(d, Player.class));
+    }
+
+    @Override
+    public Mono<Player> findByUser(String uid) {
+        return repository.findByUser(uid);
     }
 }

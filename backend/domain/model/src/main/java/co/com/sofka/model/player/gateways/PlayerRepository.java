@@ -18,5 +18,7 @@ public interface PlayerRepository {
     Mono<Player> save(Player player);
     Flux<Player> findAll();
     Mono<Player> findById(String id);
+    Mono<Player> findByUser(String uid);
+
     Mono<Void> deleteById(String id);
 }
