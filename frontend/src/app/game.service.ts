@@ -16,11 +16,8 @@ export class GameService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  refresh$: Subject<void> = new Subject();
+  refresh$ = new Subject<void>();
 
-  getRefresh$(){
-    return this.refresh$;
-  }
   createGame(game: Game): Observable<any> {
     return this.httpClient.post(this.gameUrl, game, this.httpOptions);
   }
@@ -29,8 +26,12 @@ export class GameService {
     return this.httpClient.post(`${this.gameUrl}/start`, game, this.httpOptions);
   }
 
-  getGame(id: string): Observable<any> {
-    return this.httpClient.get(`${this.gameUrl}/${id}`, this.httpOptions);
+  getGame(id: string): Observable<Game> {
+    return this.httpClient.get<Game>(`${this.gameUrl}/${id}`, this.httpOptions);
+  }
+
+  getAllGame(id: string): Observable<Game> {
+    return this.httpClient.get<Game>(`${this.gameUrl}/${id}`, this.httpOptions);
   }
 
 }

@@ -17,7 +17,7 @@ import {Card} from "../app.interface-card";
 })
 export class StartGameComponent implements OnInit {
 
-  game: Game;
+  @Input() game: Game;
   partidaId :string;
   playersGame: Player[] = [];
   rivals: Player[] = [];
@@ -48,6 +48,8 @@ export class StartGameComponent implements OnInit {
     this.gameService.startGame({id:this.partidaId, round:0, players:this.rivals, cards:[], board:this.board} as Game)
       .subscribe(game => {
         this.game = game;
+        console.log(this.game)
+        localStorage.setItem('game', JSON.stringify(game));
         this.partidaId = game.id;
       });
     this.router.navigate([`juego/${this.partidaId}`]);
