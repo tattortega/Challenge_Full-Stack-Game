@@ -80,6 +80,7 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
                         if (index.intValue() == 1) {
                             player.setTurn(Boolean.TRUE);
                         }
+                        player.setTurn(Boolean.TRUE);
                         turns.put(index.getAndIncrement(), player);
                     });
                     board.setTurn(turns);
