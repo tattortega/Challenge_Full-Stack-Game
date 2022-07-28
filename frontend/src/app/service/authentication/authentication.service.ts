@@ -3,14 +3,16 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/compat/firestore';
 import {ActivatedRoute, Route, Router, RouterLink} from '@angular/router';
 import * as auth from 'firebase/auth';
-import {User} from './app.interface-user';
-import {PlayersService} from "./players.service";
+import {User} from '../../interface/app.interface-user';
+import {PlayersService} from "../player/players.service";
+import {map, Observable, of} from "rxjs";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  private playersUrl: string = '/api/player';
   userData: any;
 
   constructor(
@@ -18,6 +20,7 @@ export class AuthenticationService {
     public afs: AngularFirestore,
     private router: Router,
     public ngZone: NgZone,
+    private http: HttpClient,
     private playerService: PlayersService) {
     this.afAuth.authState.subscribe((user) => {
       if (user) {
@@ -46,7 +49,8 @@ export class AuthenticationService {
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      window.alert('Logged out!');
+      localStorage.removeItem('player');
+      this.router.navigate(['registro']);
     });
   }
 
@@ -112,6 +116,5 @@ export class AuthenticationService {
         localStorage.setItem('player', JSON.stringify(data));
       })
     })
-
   }
 }

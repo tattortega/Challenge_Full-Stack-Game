@@ -1,7 +1,17 @@
 <body>
 <div class="container mt-3">
-  <h2>Juego de Cartas</h2>
+  <nav class="col-md-2 d-md-block">
+    <div class="sidebar-sticky">
+          <div class="row" *ngIf="serviceAuth.userData as user">
+            <p class="align-self-start mr-5">{{user.displayName}}</p>
+          </div>
+      <a class="btn btn-danger" (click)="serviceAuth.SignOut()">
+        <i class="fas fa-sign-out-alt"></i>Log out
+      </a>
+    </div>
+  </nav>
   <div class="mt-4 p-5 bg-primary text-white rounded">
+    <h2>Juego de Cartas</h2>
     <h1>Creación del Juego</h1>
     <p>Este juego de cartas permite que varios jugadores interactuen mediante la apuesta de una conjunto de cartas que serán asignadas a cada uno de ellos de manera 		aleatoria, dependiendo del poder que tiene cada carta, se obtiene el ganador de la ronda, gana el juego el jugador que obtenga todas las cartas de sus oponentes,
       cuando un jugador se quede sin cartas, será eliminado del juego. </p>

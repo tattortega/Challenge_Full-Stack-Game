@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Game } from '../app.interface-game';
-import { GameService } from '../game.service';
+import { Game } from '../interface/app.interface-game';
+import { GameService } from '../service/game/game.service';
+import {AuthenticationService} from "../service/authentication/authentication.service";
 
 @Component({
   selector: 'app-create-game',
@@ -13,7 +14,10 @@ export class CreateGameComponent implements OnInit {
     @Input() game: Game;
     partidaId : string;
 
-  constructor(private gameService: GameService, private router:Router) {}
+  constructor(
+    private gameService: GameService,
+    private router:Router,
+    public serviceAuth: AuthenticationService) {}
 
   ngOnInit(): void {}
 
@@ -24,7 +28,6 @@ export class CreateGameComponent implements OnInit {
         console.log(game);
         this.router.navigate([`iniciar/${this.partidaId}`]);
       });
-
   }
 
 }

@@ -1,6 +1,14 @@
 <body>
 <div class="container mt-3">
-  <div class="mt-4 p-5 bg-success text-white rounded">
+  <div class="mt-4 p-3 bg-success text-white rounded">
+    <div>
+      <div class="row" *ngIf="serviceAuth.userData as user">
+        <p class="align-self-start mr-5">{{user.displayName}}</p>
+      </div>
+      <a class="btn btn-danger" (click)="serviceAuth.SignOut()">
+        <i class="fas fa-sign-out-alt"></i>Log out
+      </a>
+    </div>
     <h1>Selección de Jugadores</h1>
     <p>Para iniciar el juego, seleccione los oponentes de acuerdo con la lista que aparece a continuación: </p>
     <div class="example-container">
@@ -28,7 +36,7 @@
         <div class="example-box" *ngFor="let rival of rivals" cdkDrag>{{rival.id}}</div>
       </div>
     </div>
-    <button class="btn btn-danger btn-lg rounded-pill pe-5 ps-5" (click)="start()">Iniciar Juego</button>
+    <button class="btn btn-danger btn-lg rounded-pill" (click)="start()">Iniciar Juego</button>
   </div>
 </div>
 </body>

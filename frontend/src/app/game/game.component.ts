@@ -1,12 +1,12 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {Card} from '../app.interface-card';
-import {Player} from '../app.interface-player';
-import {PlayersService} from '../players.service';
+import {Card} from '../interface/app.interface-card';
+import {Player} from '../interface/app.interface-player';
+import {PlayersService} from '../service/player/players.service';
 import {ActivatedRoute} from "@angular/router";
-import {GameService} from "../game.service";
-import {Game} from "../app.interface-game";
+import {GameService} from "../service/game/game.service";
+import {Game} from "../interface/app.interface-game";
 
 
 @Component({
@@ -27,13 +27,12 @@ export class GameComponent implements OnInit, AfterViewInit {
   constructor(
     private playersService: PlayersService,
     private gameService: GameService,
-    private routeActive: ActivatedRoute)
-  {}
+    private routeActive: ActivatedRoute) {
+  }
 
   ngAfterViewInit(): void {
-        this.getGame()
-    console.log(this.game)
-    }
+    this.getGame()
+  }
 
   ngOnInit(): void {
     // this.myList = [];
@@ -62,23 +61,35 @@ export class GameComponent implements OnInit, AfterViewInit {
     })
   }
 
+  betCards(idCard: string) {
+    console.log(this.game)
+    this.gameService.betCard(idCard, this.game).subscribe(game => {
+      console.log(game)
+      this.game = game;
+    })
+  }
+
 
   dropOnList($event: CdkDragDrop<Card[]>) {
 
-    if($event.previousContainer === $event.container){
+    if ($event.previousContainer === $event.container) {
       moveItemInArray(
-      $event.container.data,
-      $event.previousIndex,
-      $event.currentIndex
+        $event.container.data,
+        $event.previousIndex,
+        $event.currentIndex
       )
-  }else{
-    transferArrayItem(
-      $event.previousContainer.data,
-      $event.container.data,
-      $event.previousIndex,
-      $event.currentIndex
-    );
-  }
+    } else {
+      transferArrayItem(
+        $event.previousContainer.data,
+        $event.container.data,
+        $event.previousIndex,
+        $event.currentIndex
+      );
+    }
+
+    let cartaApostada: Card = $event.container.data[0]
+    console.log(cartaApostada);
+    this.betCards(cartaApostada.id);
   }
 
 }
