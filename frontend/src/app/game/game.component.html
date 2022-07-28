@@ -16,6 +16,7 @@
         [cdkDragData]="card"
       >
         <img [src]="card.image" alt="" width="100rem" height="120rem"/>
+        <br>
         {{card.description}}
       </div>
     </div>
@@ -31,10 +32,12 @@
           cdkDrag
           [cdkDragData]="card"
         >
-          {{card.power}}
-          <img [src]="url" alt="" width="100rem" height="120rem" />
+          <img [src]="card.image" alt="" width="100rem" height="120rem" />
+          <br>
           {{card.description}}
-          <br><br>
+          <br>
+          <p>XP: {{card.power}}</p>
+          <br>
         </div>
       </cdk-virtual-scroll-viewport>
     </div>

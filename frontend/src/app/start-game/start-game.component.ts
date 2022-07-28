@@ -46,14 +46,14 @@ export class StartGameComponent implements OnInit {
     let playerOwnerGame = JSON.parse(localStorage.getItem('player')!);
     this.rivals.push(playerOwnerGame);
     this.gameService.startGame({id:this.partidaId, round:0, players:this.rivals, cards:[], board:this.board} as Game)
-      .subscribe(game => {
+      .subscribe({next: game => {
         this.game = game;
-        console.log(this.game)
-        localStorage.setItem('game', JSON.stringify(game));
-        this.partidaId = game.id;
-      });
-    this.router.navigate([`juego/${this.partidaId}`]);
-
+        // console.log(this.game)
+        // localStorage.setItem('game', JSON.stringify(game));
+        // this.partidaId = game.id;
+      },complete: () => {
+          this.router.navigate([`juego/${this.partidaId}`]);
+        }});
   }
 
   drop(event: CdkDragDrop<Player[]>) {
