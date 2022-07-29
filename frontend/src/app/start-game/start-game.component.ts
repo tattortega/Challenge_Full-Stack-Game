@@ -51,6 +51,8 @@ export class StartGameComponent implements OnInit {
   start(): void {
     let playerOwnerGame = JSON.parse(localStorage.getItem('player')!);
     this.rivals.push(playerOwnerGame);
+    console.log(playerOwnerGame)
+    console.log(this.rivals)
     this.gameService.startGame({
       id: this.partidaId,
       round: 0,
@@ -65,7 +67,7 @@ export class StartGameComponent implements OnInit {
           // localStorage.setItem('game', JSON.stringify(game));
           // this.partidaId = game.id;
         }, complete: () => {
-          this.router.navigate([`juego/${this.partidaId}`]);
+          // this.router.navigate([`juego/${this.partidaId}`]);
         }
       });
   }

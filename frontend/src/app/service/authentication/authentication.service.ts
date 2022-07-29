@@ -78,8 +78,7 @@ export class AuthenticationService {
           this.router.navigate(['crear']);
         });
         this.SetUserData(result.user);
-        // if ()
-        this.newPlayer(result.user!.uid);
+        this.newPlayer(result.user.email ,result.user!.uid);
       })
       .catch((error) => {
         window.alert(error);
@@ -101,18 +100,19 @@ export class AuthenticationService {
         this.SetUserData(result.user);
         alert("Registro exitoso")
         document.getElementById("reg-log").click();
-        this.newPlayer(result.user!.uid);
+        this.newPlayer(result.user.email ,result.user!.uid);
       })
       .catch((error) => {
         window.alert(error.message);
       });
   }
 
-  newPlayer(uid:string){
+  newPlayer(username:string,uid:string){
     this.playerService.getPlayer(uid).subscribe(data => {
       localStorage.setItem('player', JSON.stringify(data));
     }, error => {
-      this.playerService.createPlayer(uid).subscribe(data => {
+      this.playerService.createPlayer(username,uid).subscribe(data => {
+        console.log(data)
         localStorage.setItem('player', JSON.stringify(data));
       })
     })

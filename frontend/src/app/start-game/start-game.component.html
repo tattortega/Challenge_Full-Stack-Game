@@ -20,7 +20,7 @@
         [cdkDropListConnectedTo]="[rivalsList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let player of playersGame" cdkDrag>{{player.id}}</div>
+        <div class="example-box" *ngFor="let player of playersGame" cdkDrag>{{player.name}}</div>
       </div>
     </div>
 
@@ -33,7 +33,7 @@
         [cdkDropListConnectedTo]="[playersGameList]"
         class="example-list"
         (cdkDropListDropped)="drop($event)">
-        <div class="example-box" *ngFor="let rival of rivals" cdkDrag>{{rival.id}}</div>
+        <div class="example-box" *ngFor="let rival of rivals" cdkDrag>{{rival.name}}</div>
       </div>
     </div>
     <button class="btn btn-danger btn-lg rounded-pill" (click)="start()">Iniciar Juego</button>

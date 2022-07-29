@@ -26,13 +26,15 @@ export class PlayersService {
     return this.http.get(`${this.playersUrl}/user/${uid}`, this.httpOptions);
   }
 
-  public createPlayer(uid:string): Observable<any> {
+  public createPlayer(username:string,uid:string): Observable<any> {
     const data: Player = {
       score: 0,
+      name: username,
       cards: [],
       turn: false,
       user: uid
     }
+    console.log(data)
     return this.http.post(this.playersUrl, data, this.httpOptions);
   }
 
