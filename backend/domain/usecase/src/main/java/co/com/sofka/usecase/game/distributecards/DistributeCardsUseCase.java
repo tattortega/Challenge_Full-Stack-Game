@@ -79,7 +79,7 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
         Set<Card> cardSet = new HashSet<>();
         List<Card> cardList = new ArrayList<>(game.getCards());
         Random r = new Random();
-        Flux.range(0, 3)
+        Flux.range(0, 5)
                 .map(i -> {
                     int value = r.nextInt(cardList.size() - i);
                     cardSet.add(cardList.get(value));
