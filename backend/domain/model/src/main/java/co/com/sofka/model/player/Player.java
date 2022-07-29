@@ -23,6 +23,7 @@ import java.util.Set;
 @Builder(toBuilder = true)
 public class Player {
     private String id;
+    private String name;
     private Integer score;
     private Set<Card> cards;
     private Boolean turn;

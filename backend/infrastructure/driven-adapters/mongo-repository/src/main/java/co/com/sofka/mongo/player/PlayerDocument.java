@@ -21,6 +21,7 @@ import java.util.Set;
 public class PlayerDocument {
     @Id
     private String id;
+    private String name;
     private Integer score;
     private Set<Card> cards;
     private Boolean turn;

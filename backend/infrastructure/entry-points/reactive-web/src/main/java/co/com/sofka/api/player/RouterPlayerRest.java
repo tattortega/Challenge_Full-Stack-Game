@@ -7,10 +7,11 @@ import co.com.sofka.api.player.handler.CreatePlayerHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
+import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
-import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
-import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 /**
@@ -33,7 +34,9 @@ public class RouterPlayerRest {
      */
     @Bean
     public RouterFunction<ServerResponse> routerCreatePlayerFunction(CreatePlayerHandler createPlayerHandler) {
-        return route(POST("/api/player"), createPlayerHandler::createPlayer);
+        return RouterFunctions.route(
+                POST("/api/player").and(contentType(APPLICATION_JSON)), createPlayerHandler::createPlayer);
+//        return route(POST("/api/player"), createPlayerHandler::createPlayer);
     }
 
     /**
