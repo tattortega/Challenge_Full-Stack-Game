@@ -66,7 +66,7 @@ class EndGameUseCaseTest {
         cardsGame.add(card11);
 
         Set<Player> players = new HashSet<>();
-        Player player1 = new Player("1", 0, cardsPlayer1, true, null);
+        Player player1 = new Player("1", "player1",0, cardsPlayer1, true, null);
         players.add(player1);
 
         Map<Integer, Player> turn = new HashMap<>();

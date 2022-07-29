@@ -2,13 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from '../../interface/app.interface-player';
 import { Observable } from 'rxjs';
+import {environment} from "../../../environments/environment.prod";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayersService {
 
-  private playersUrl: string = '/api/player';
+  private playersUrl: string = environment.baseUrl+'/api/player';
 
 
   constructor(private http: HttpClient) { }

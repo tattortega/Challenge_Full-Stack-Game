@@ -78,9 +78,9 @@ class DistributeCardsUseCaseTest {
         Flux<Card> cardFlux = Flux.just(card1, card2, card3, card4, card5, card6, card7, card8, card9, card10, card11);
 
         Set<Player> players = new HashSet<>();
-        Player player1 = new Player("1", 0, null, false, null);
-        Player player2 = new Player("2", 0, null, false, null);
-        Player player3 = new Player("3", 0, null, false, null);
+        Player player1 = new Player("1","player1", 0, null, false, null);
+        Player player2 = new Player("2","player2", 0, null, false, null);
+        Player player3 = new Player("3", "player3",0, null, false, null);
         players.add(player1);
         players.add(player2);
         players.add(player3);

@@ -12,6 +12,7 @@ public class CorsGlobalConfiguration implements WebFluxConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins("http://localhost:4200/")
+                .allowedOrigins("https://game-cards-de8c1.web.app/")
                 .allowedMethods("GET","POST","PUT", "DELETE")
                 .allowCredentials(true).maxAge(3600);
     }

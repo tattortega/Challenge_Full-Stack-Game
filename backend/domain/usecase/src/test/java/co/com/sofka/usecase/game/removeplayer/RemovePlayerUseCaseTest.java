@@ -58,9 +58,9 @@ class RemovePlayerUseCaseTest {
         cardsGame.add(card11);
 
         Set<Player> players = new HashSet<>();
-        Player player1 = new Player("1", 0, cardsPlayer1, true, null);
-        Player player2 = new Player("2", 0, null, false, null);
-        Player player3 = new Player("3", 0, null, false, null);
+        Player player1 = new Player("1","player1", 0, cardsPlayer1, true, null);
+        Player player2 = new Player("2","player2", 0, null, false, null);
+        Player player3 = new Player("3","player3", 0, null, false, null);
         players.add(player1);
         players.add(player2);
         players.add(player3);

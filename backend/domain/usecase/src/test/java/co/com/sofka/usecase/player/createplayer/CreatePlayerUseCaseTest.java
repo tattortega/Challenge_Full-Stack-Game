@@ -3,7 +3,6 @@ package co.com.sofka.usecase.player.createplayer;
 import co.com.sofka.model.card.Card;
 import co.com.sofka.model.player.Player;
 import co.com.sofka.model.player.gateways.PlayerRepository;
-import co.com.sofka.model.user.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -34,9 +33,8 @@ class CreatePlayerUseCaseTest {
     @Test
     void createPlayerTest() {
         Set<Card> cards = new HashSet<>();
-        User user = new User();
-
-        Player player = new Player("1",0,cards,false,user);
+        String user = "12345";
+        Player player = new Player("1","player1",0,cards,false,user);
         Mono<Player> playerMono = Mono.just(player);
 
         when(playerRepository.save(Mockito.any(Player.class))).thenReturn(playerMono);
