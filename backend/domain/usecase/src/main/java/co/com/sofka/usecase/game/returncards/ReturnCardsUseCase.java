@@ -32,7 +32,8 @@ public class ReturnCardsUseCase implements BiFunction<Game, String, Mono<Game>> 
      */
     @Override
     public Mono<Game> apply(Game game, String idPlayer) {
-
+        System.out.println("juegoantesretornarcartas" +game);
+        System.out.println("jugadoraquitarcartas" +idPlayer);
         return gameRepository.findById(game.getId())
                 .map(game1 -> game1.getPlayers().stream().findFirst().get())
                 .map(player -> {

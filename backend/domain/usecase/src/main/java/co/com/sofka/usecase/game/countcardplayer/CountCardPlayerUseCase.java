@@ -36,14 +36,12 @@ public class CountCardPlayerUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-
+        System.out.println("juegodespuesterminarronda"+game);
         Set<Player> playersWhitoutCards = game.getPlayers()
                 .stream()
                 .filter(player -> player.getCards().isEmpty())
                 .collect(Collectors.toSet());
-
-        return gameRepository.save(game)
-                .flatMap(game1 -> removePlayerUseCase.apply(game1, playersWhitoutCards))
-                .flatMap(gameRepository::save);
+        System.out.println("jugadoressincartas "+ playersWhitoutCards);
+        return removePlayerUseCase.apply(game, playersWhitoutCards);
     }
 }

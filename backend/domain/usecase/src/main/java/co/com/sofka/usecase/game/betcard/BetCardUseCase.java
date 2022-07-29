@@ -40,12 +40,13 @@ public class BetCardUseCase implements BiFunction<Game, String, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game, String idCard) {
-
+        System.out.println("idcartaapostada" + idCard);
+        System.out.println("juego" + game);
         Map<String, Card> betCard = new HashMap<>(game.getBoard().getCardsBetPlayers());
-
+        System.out.println("cartas apostadas" + betCard);
         Flux.fromIterable(game.getBoard().getTurn().keySet())
                 .map(k -> {
-                    if (Boolean.TRUE.equals(game.getBoard().getTurn().get(k).getTurn())) {
+                    if (game.getBoard().getTurn().get(k).getTurn()) {
                         game.getBoard().getTurn().get(k).getCards().forEach(card -> {
                             if (card.getId().equals(idCard)) {
                                 betCard.put(game.getBoard().getTurn().get(k).getId(), card);
@@ -62,10 +63,11 @@ public class BetCardUseCase implements BiFunction<Game, String, Mono<Game>> {
                                 if (k < game.getBoard().getTurn().size()) {
                                     game.getBoard().getTurn().get(k + 1).setTurn(Boolean.TRUE);
                                 } else {
-                                    gameRepository.save(game);
+                                    gameRepository.save(game).subscribe();
                                     comparateCardsInGameUseCase.apply(game)
                                             .flatMap(gameRepository::save)
                                             .subscribe();
+                                    game.getBoard().getTurn().get(1).setTurn(Boolean.TRUE);
                                 }
                             }
                         });

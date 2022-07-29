@@ -38,35 +38,24 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-        Set<Player> playerSet1;
-        Set<Player> playerSet = game.getPlayers();
-        playerSet1 = playerSet.stream().map(player -> {
+        Set<Player> playerSet1 = new HashSet<>();
+        Set<Player> playerSet = new HashSet<>(game.getPlayers());
+        System.out.println("jugadores "+playerSet);
+        playerSet.stream().map(player -> {
+            System.out.println("jugador "+player);
             Set<Card> cardSet = addCards(game);
-            game.toBuilder()
-                    .id(game.getId())
-                    .round(game.getRound())
-                    .players(game.getPlayers())
-                    .board(game.getBoard())
-                    .cards(removeCard(cardSet, game.getCards()))
-                    .build();
-            return player.toBuilder()
-                    .id(player.getId())
-                    .score(player.getScore())
-                    .user(player.getUser())
-                    .cards(cardSet)
-                    .turn(player.getTurn())
-                    .build();
+            game.setCards(removeCard(cardSet, game.getCards()));
+            System.out.println("gamedepuesbuilder "+game);
+            player.setCards(cardSet);
+            System.out.println("cardsplayer "+player);
+            return playerSet1.add(player);
         }).collect(Collectors.toSet());
-
-        return gameRepository.findById(game.getId())
-                .map(p -> p.toBuilder()
-                        .id(game.getId())
-                        .round(game.getRound())
-                        .players(playerSet1)
-                        .board(game.getBoard())
-                        .cards(game.getCards())
-                        .build())
-                .flatMap(gameRepository::save)
+        playerSet1.stream().sorted();
+        System.out.println("playerantesguardar "+ game);
+        System.out.println("playerset1 "+playerSet1);
+//        Mono<Game> gameSave = gameRepository.save(game);
+//        System.out.println("gamsave........." +gameSave);
+        return Mono.just(game)
                 .map(game2 -> {
                     Board board = new Board();
                     board.setId(game2.getBoard().getId());
@@ -77,11 +66,15 @@ public class DistributeCardsUseCase implements Function<Game, Mono<Game>> {
                     index.getAndIncrement();
 
                     game2.getPlayers().forEach(player -> {
+                        System.out.println("playerdistribuir"+ player);
                         if (index.intValue() == 1) {
                             player.setTurn(Boolean.TRUE);
+                            turns.put(index.getAndIncrement(), player);
                         }
-                        player.setTurn(Boolean.TRUE);
-                        turns.put(index.getAndIncrement(), player);
+                        else {
+                            player.setTurn(Boolean.FALSE);
+                            turns.put(index.getAndIncrement(), player);
+                        }
                     });
                     board.setTurn(turns);
                     game2.setBoard(board);

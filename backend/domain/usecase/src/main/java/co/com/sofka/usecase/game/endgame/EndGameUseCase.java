@@ -33,7 +33,7 @@ public class EndGameUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-
+        System.out.println("juegodespuesganadorjuego"+ game);
         gameRepository.findById(game.getId())
                 .map(game1 -> {
                     game1.getPlayers().stream().findFirst().get().setScore(100);

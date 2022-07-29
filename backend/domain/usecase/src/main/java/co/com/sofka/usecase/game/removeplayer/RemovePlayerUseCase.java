@@ -7,6 +7,8 @@ import co.com.sofka.usecase.game.cleanboard.CleanBoardUseCase;
 import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
@@ -30,18 +32,19 @@ public class RemovePlayerUseCase implements BiFunction<Game, Set<Player>, Mono<G
      * Método que recibe los jugadores que se quedaron sin cartas en el juego
      * Invoca el caso de uso limpiar tablero
      *
-     * @param game Game
+     * @param game          Game
      * @param playersRemove Set<Player>
      * @return Mono<Game>
      */
     @Override
     public Mono<Game> apply(Game game, Set<Player> playersRemove) {
-
-        playersRemove.stream().map(player -> {
-            game.getPlayers().remove(player);
-            return game;
-        }).collect(Collectors.toSet());
-
+        System.out.println("juegoantesremoverjugadores" + game);
+        System.out.println("jugadoresaremover " + playersRemove);
+        playersRemove.forEach(player -> {
+            game.getPlayers().removeIf(player1 ->
+                    player1.equals(player));
+        });
+        System.out.println("juegodespuesremoverjugadores" + game);
         return cleanBoardUseCase.apply(game)
                 .flatMap(gameRepository::save);
 

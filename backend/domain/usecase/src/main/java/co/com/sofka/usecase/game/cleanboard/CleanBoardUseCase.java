@@ -40,12 +40,7 @@ public class CleanBoardUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-
-        if (game.getPlayers().size() == 1) {
-            gameRepository.save(game);
-            return endGameUseCase.apply(game);
-        }
-
+        System.out.println("juegoanteslimpiartablero" +game);
         Board board = new Board();
         board.setId(game.getBoard().getId());
         board.setCardsBetPlayers(new HashMap<>());
@@ -54,21 +49,23 @@ public class CleanBoardUseCase implements Function<Game, Mono<Game>> {
         Map<Integer, Player> turns = new HashMap<>();
         AtomicInteger index = new AtomicInteger();
         index.getAndIncrement();
-        gameRepository.findById(game.getId())
-                .map(game1 -> game.getPlayers())
-                .subscribe();
 
         game.getPlayers().forEach(player -> {
-            if (index.intValue() == 1) {
-                int x = index.intValue();
-                game.getBoard().getTurn().get(x).setTurn(Boolean.TRUE);
-            }
+            int x = index.intValue();
+            System.out.println("playerboard"+ player);
             turns.put(index.getAndIncrement(), player);
+            System.out.println("turns:+++++++" +turns);
         });
         board.setTurn(turns);
         game.setBoard(board);
         game.setRound(game.getRound() + 1);
 
+        System.out.println("juegodespueslimpiartablero"+ game);
+        if (game.getPlayers().size() == 1) {
+            gameRepository.save(game);
+            System.out.println("cantidadjugadores"+game.getPlayers().size());
+            return endGameUseCase.apply(game);
+        }
         return gameRepository.save(game);
     }
 }

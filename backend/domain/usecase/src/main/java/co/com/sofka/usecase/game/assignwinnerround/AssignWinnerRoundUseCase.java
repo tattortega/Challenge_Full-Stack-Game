@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
@@ -40,9 +41,9 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
     public Mono<Game> apply(Game game, String idWinner) {
 
         Map<String, Card> mapCards = game.getBoard().getCardsBetPlayers();
-
-        Set<Card> betCards = mapCards.entrySet().stream().map(Map.Entry::getValue).collect(Collectors.toSet());
-
+        System.out.println("map idplayer y cartas apostadas "+mapCards);
+        Set<Card> betCards = new HashSet<>(mapCards.values());
+        System.out.println("cartas apostadas");
         Flux.fromIterable(game.getPlayers())
                 .filter(player -> player.getId().equals(idWinner))
                 .map(player -> {
@@ -55,11 +56,9 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
                             return player;
                         }).collect(Collectors.toList()))
                 .subscribe();
+        System.out.println("jugadoresdespuesderone"+ game.getPlayers());
 
-
-        return gameRepository.save(game)
-                .flatMap(countCardPlayerUseCase::apply)
-                .flatMap(gameRepository::save);
+        return countCardPlayerUseCase.apply(game);
 
     }
 }
