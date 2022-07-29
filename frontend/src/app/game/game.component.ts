@@ -1,12 +1,13 @@
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {Subscription} from 'rxjs';
+import {interval, Subscription} from 'rxjs';
 import {Card} from '../interface/app.interface-card';
 import {Player} from '../interface/app.interface-player';
 import {PlayersService} from '../service/player/players.service';
 import {ActivatedRoute} from "@angular/router";
 import {GameService} from "../service/game/game.service";
 import {Game} from "../interface/app.interface-game";
+import {Board} from "../interface/app.interface-board";
 
 
 @Component({
@@ -18,10 +19,10 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   game: Game
   cards: Card[]
+  board: Board
   myList: Card[] = [];
   partidaId: string;
   contador: number = 0;
-  url: string = "";
   players: Player[] = [];
 
   constructor(
@@ -32,23 +33,24 @@ export class GameComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.getGame()
+
   }
 
   ngOnInit(): void {
-    // this.myList = [];
+    this.myList = [];
     this.partidaId = this.routeActive.snapshot.params['id'];
-    // const obs$ = interval(4000);
-    // obs$.subscribe(a => {
-    //   this.contador = a;
-    //   this.url = this.cards[a].image;
-    // });
-    // this.cards = this.game.players[0].cards;
-    // this.url = this.cards[0].image;
+    const obs$ = interval(10000);
+    obs$.subscribe(a => {
+      // confirm("turno")
+      this.contador = a;
+    });
   }
 
   getGame(): void {
     this.gameService.getGame(this.partidaId).subscribe(games => {
       this.game = games;
+      this.board = this.game.board
+      console.log(this.board)
       this.getCards()
     });
   }
@@ -58,6 +60,16 @@ export class GameComponent implements OnInit, AfterViewInit {
       if (player.id === JSON.parse(localStorage.getItem('player')!).id) {
         this.cards = player.cards
       }
+    })
+    this.time()
+  }
+
+  time(){
+    let map = this.board.turn
+    Object.keys(map).forEach(function(key){
+      console.log(map[key]);
+
+
     })
   }
 
@@ -90,6 +102,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     let cartaApostada: Card = $event.container.data[0]
     console.log(cartaApostada);
     this.betCards(cartaApostada.id);
+    if (confirm("turno")) {
+      window.location.reload()
+    }
   }
 
 }
