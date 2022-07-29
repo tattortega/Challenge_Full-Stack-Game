@@ -35,6 +35,8 @@ export class GameService {
   }
 
   betCard(idCard: string, game:Game): Observable<any> {
+    console.log(idCard)
+    console.log(game)
     let res = this.httpClient.post(`${this.gameUrl}/bet-card/${idCard}`,game, this.httpOptions)
     console.log(res.subscribe(p=>{
       console.log(p)

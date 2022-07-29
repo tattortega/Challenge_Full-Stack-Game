@@ -23,8 +23,8 @@ export class StartGameComponent implements OnInit {
   playersGame: Player[] = [];
   rivals: Player[] = [];
   board: Board = {
-    id: "1",
-    cardsBetPlayers: null,
+    id: null,
+    cardsBetPlayers: new Map<string, Card>(),
     turn: null,
     winnerRound: null
   }

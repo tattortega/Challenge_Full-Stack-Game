@@ -15,7 +15,6 @@ import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreModule } fr
 import { RegisterLoginComponent } from './register-login/register-login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { GameComponent } from './game/game.component';
-import {CookieService} from "ngx-cookie-service";
 
 
 @NgModule({
@@ -37,7 +36,7 @@ import {CookieService} from "ngx-cookie-service";
     AngularFirestoreModule,
     AppRoutingModule
   ],
-  providers: [CookieService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
