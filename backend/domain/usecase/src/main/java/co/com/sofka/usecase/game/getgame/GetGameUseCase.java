@@ -21,9 +21,7 @@ import java.util.function.Function;
  */
 @RequiredArgsConstructor
 public class GetGameUseCase implements Function<String, Mono<Game>> {
-
     private static final String GAME_CON_EL_ID_NO_EXISTE = "Game con el id %s no existe";
-
     private final GameRepository gameRepository;
 
     @Override

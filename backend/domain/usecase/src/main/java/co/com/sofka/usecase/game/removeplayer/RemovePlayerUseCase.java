@@ -38,13 +38,10 @@ public class RemovePlayerUseCase implements BiFunction<Game, Set<Player>, Mono<G
      */
     @Override
     public Mono<Game> apply(Game game, Set<Player> playersRemove) {
-        System.out.println("juegoantesremoverjugadores" + game);
-        System.out.println("jugadoresaremover " + playersRemove);
         playersRemove.forEach(player -> {
             game.getPlayers().removeIf(player1 ->
                     player1.equals(player));
         });
-        System.out.println("juegodespuesremoverjugadores" + game);
         return cleanBoardUseCase.apply(game)
                 .flatMap(gameRepository::save);
 

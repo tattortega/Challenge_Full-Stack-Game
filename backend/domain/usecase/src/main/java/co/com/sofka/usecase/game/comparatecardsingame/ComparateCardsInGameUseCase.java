@@ -36,14 +36,11 @@ public class ComparateCardsInGameUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-
         Map<String, Card> mapCards = game.getBoard().getCardsBetPlayers();
-        System.out.println("cartas apostadas"+ mapCards);
         String idWinner = mapCards.entrySet()
                 .stream()
-                .max((a, b) -> a.getValue().getPower().compareTo(b.getValue().getPower()))
+                .max(Comparator.comparing(a -> a.getValue().getPower()))
                 .map(Map.Entry::getKey).get();
-        System.out.println("ganadorronda "+ idWinner);
         return assignWinnerRoundUseCase.apply(game, idWinner);
     }
 }

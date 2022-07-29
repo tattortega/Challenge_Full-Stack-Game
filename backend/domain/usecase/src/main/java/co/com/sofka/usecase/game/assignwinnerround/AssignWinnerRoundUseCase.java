@@ -33,17 +33,15 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
     /**
      * Método que recibe el juego y el ID del ganador de la ronda y darle las cartas apostadas
      * Despues de asignar el ganador invoca al caso de uso contar cartas de jugadores
-     * @param game Game
+     *
+     * @param game     Game
      * @param idWinner String
      * @return Mono<Game>
      */
     @Override
     public Mono<Game> apply(Game game, String idWinner) {
-
         Map<String, Card> mapCards = game.getBoard().getCardsBetPlayers();
-        System.out.println("map idplayer y cartas apostadas "+mapCards);
         Set<Card> betCards = new HashSet<>(mapCards.values());
-        System.out.println("cartas apostadas");
         Flux.fromIterable(game.getPlayers())
                 .filter(player -> player.getId().equals(idWinner))
                 .map(player -> {
@@ -56,7 +54,6 @@ public class AssignWinnerRoundUseCase implements BiFunction<Game, String, Mono<G
                             return player;
                         }).collect(Collectors.toList()))
                 .subscribe();
-        System.out.println("jugadoresdespuesderone"+ game.getPlayers());
 
         return countCardPlayerUseCase.apply(game);
 

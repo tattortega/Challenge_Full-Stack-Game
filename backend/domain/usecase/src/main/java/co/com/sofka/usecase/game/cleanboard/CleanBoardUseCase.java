@@ -40,7 +40,6 @@ public class CleanBoardUseCase implements Function<Game, Mono<Game>> {
      */
     @Override
     public Mono<Game> apply(Game game) {
-        System.out.println("juegoanteslimpiartablero" +game);
         Board board = new Board();
         board.setId(game.getBoard().getId());
         board.setCardsBetPlayers(new HashMap<>());
@@ -51,19 +50,14 @@ public class CleanBoardUseCase implements Function<Game, Mono<Game>> {
         index.getAndIncrement();
 
         game.getPlayers().forEach(player -> {
-            int x = index.intValue();
-            System.out.println("playerboard"+ player);
             turns.put(index.getAndIncrement(), player);
-            System.out.println("turns:+++++++" +turns);
         });
         board.setTurn(turns);
         game.setBoard(board);
         game.setRound(game.getRound() + 1);
 
-        System.out.println("juegodespueslimpiartablero"+ game);
         if (game.getPlayers().size() == 1) {
             gameRepository.save(game);
-            System.out.println("cantidadjugadores"+game.getPlayers().size());
             return endGameUseCase.apply(game);
         }
         return gameRepository.save(game);
