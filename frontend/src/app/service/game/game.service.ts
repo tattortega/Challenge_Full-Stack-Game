@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import {Observable, Subject, tap} from 'rxjs';
 import { Game } from '../../interface/app.interface-game';
-import {environment} from "../../../environments/environment.prod";
+import {environment} from "../../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GameService {
 
-  private gameUrl = environment.baseUrl+"/api/game";
+  private gameUrl = "/api/game";
 
   constructor(private httpClient: HttpClient, private router:Router) { }
 
