@@ -63,11 +63,9 @@ export class StartGameComponent implements OnInit {
       .subscribe({
         next: game => {
           this.game = game;
-          // console.log(this.game)
-          // localStorage.setItem('game', JSON.stringify(game));
-          // this.partidaId = game.id;
+          this.partidaId = game.id;
         }, complete: () => {
-          // this.router.navigate([`juego/${this.partidaId}`]);
+          this.router.navigate([`juego/${this.partidaId}`]);
         }
       });
   }

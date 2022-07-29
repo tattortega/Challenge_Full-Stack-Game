@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Player } from '../../interface/app.interface-player';
 import { Observable } from 'rxjs';
-import {Card} from "../../interface/app.interface-card";
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,6 @@ export class PlayersService {
       turn: false,
       user: uid
     }
-    console.log(data)
     return this.http.post(this.playersUrl, data, this.httpOptions);
   }
 

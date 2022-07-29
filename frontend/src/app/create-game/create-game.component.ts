@@ -25,7 +25,6 @@ export class CreateGameComponent implements OnInit {
     this.gameService.createGame({round:0, players:[], cards:[], board:null } as Game)
       .subscribe(game => {
         this.partidaId = game.id;
-        console.log(game);
         this.router.navigate([`iniciar/${this.partidaId}`]);
       });
   }
