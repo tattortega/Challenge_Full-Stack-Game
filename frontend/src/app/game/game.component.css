@@ -3,6 +3,9 @@ body{
   background-image: url("../../assets/1615546576_319724_1615546812_noticia_normal.jpg");
   background-size: cover;
 }
+.image{
+  cursor: pointer;
+}
 .container {
   padding: 90px;
   width: 100vw;

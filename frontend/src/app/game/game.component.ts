@@ -39,19 +39,14 @@ export class GameComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.myList = [];
     this.partidaId = this.routeActive.snapshot.params['id'];
-    const obs$ = interval(10000);
-    obs$.subscribe(a => {
-      // confirm("turno")
-      this.contador = a;
-    });
   }
 
   getGame(): void {
     this.gameService.getGame(this.partidaId).subscribe(games => {
       this.game = games;
       this.board = this.game.board
-      console.log(this.board)
       this.getCards()
+
     });
   }
 
@@ -61,23 +56,50 @@ export class GameComponent implements OnInit, AfterViewInit {
         this.cards = player.cards
       }
     })
-    this.time()
+    this.turn()
   }
 
-  time(){
+  turn(){
     let map = this.board.turn
-    Object.keys(map).forEach(function(key){
-      console.log(map[key]);
+    console.log(map)
+    const output = document.querySelector("#output");
+    const display = s => console.log(s);
+    const delayLoop = (fn, delay) => {
+      return (name, i) => {
+        setTimeout(() => {
+          // alert("Es tu turno de apostar")
+        }, i * 1000);
+      }
+    };
 
-
-    })
+    Object.keys(map).forEach(delayLoop(display, 1000));
+    // Object.keys(map).forEach(function(key){
+      // if (key == "1"){
+      //   console.log("entro")
+      //   alert("Es tu turno de apostar")
+      //   const obs$ = interval(5000);
+      //   obs$.subscribe(a => {
+      //     this.contador = a;
+      //   });
+      // }
+      // let turn = map[key]
+    //   if (turn.id != JSON.parse(localStorage.getItem('player')!).id) {
+    //     alert("Es tu turno de apostar")
+    //     const obs$ = interval(5000);
+    //     obs$.subscribe(a => {
+    //       this.contador = a;
+    //     });
+    //   }
+    // })
   }
 
   betCards(idCard: string) {
     console.log(this.game)
     this.gameService.betCard(idCard, this.game).subscribe(game => {
-      console.log(game)
       this.game = game;
+      Object.keys(this.game.board.cardsBetPlayers).forEach(p=>{
+        this.myList.push(this.game.board.cardsBetPlayers[p])
+      })
     })
   }
 
@@ -102,9 +124,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     let cartaApostada: Card = $event.container.data[0]
     console.log(cartaApostada);
     this.betCards(cartaApostada.id);
-    if (confirm("turno")) {
-      window.location.reload()
-    }
+    // if (confirm("turno")) {
+    //   window.location.reload()
+    // }
   }
 
 }
