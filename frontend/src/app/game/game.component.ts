@@ -46,7 +46,9 @@ export class GameComponent implements OnInit, AfterViewInit {
       this.game = games;
       this.board = this.game.board
       this.getCards()
-
+      Object.keys(this.game.board.cardsBetPlayers).forEach(p=>{
+        this.myList.push(this.game.board.cardsBetPlayers[p])
+      })
     });
   }
 
@@ -97,9 +99,9 @@ export class GameComponent implements OnInit, AfterViewInit {
     console.log(this.game)
     this.gameService.betCard(idCard, this.game).subscribe(game => {
       this.game = game;
-      Object.keys(this.game.board.cardsBetPlayers).forEach(p=>{
-        this.myList.push(this.game.board.cardsBetPlayers[p])
-      })
+      // Object.keys(this.game.board.cardsBetPlayers).forEach(p=>{
+      //   this.myList.push(this.game.board.cardsBetPlayers[p])
+      // })
     })
   }
 
